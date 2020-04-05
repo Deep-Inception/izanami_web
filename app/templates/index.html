@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
     <head>
         <title>{{name}}</title>
     </head>
@@ -10,5 +10,18 @@
         <input type="submit" value="Submit">
     </form>
     <img src="/static/images/logo_deep_inception.png" alt="Deep Inception">
+    <form action="/add" method="POST">
+        <input type="text" name="title" placeholder="title">
+        <input type="text" name="body" placeholder="body">
+        <input type="submit" value="add">
+    </form>
+    <form action="/update" method="POST">
+        <input type="text" name="title" placeholder="title">
+        <input type="text" name="body" placeholder="body">
+        <input type="submit" value="update">
+        {% for onegai in all_onegai %}
+        <div><input type="radio" name="update" value={{onegai.id}}>{{onegai.title}}:{{onegai.body}}({{onegai.date}})</input></div>
+        {% endfor %}
+    </form>
     </body>
 </html>
