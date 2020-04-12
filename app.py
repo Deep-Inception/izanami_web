@@ -1,6 +1,6 @@
 from flask import Flask,render_template,request
-from models.models import OnegaiContent
-from models.database import db_session
+from models.model import OnegaiContent
+from config.database import db_session
 from datetime import datetime
 
 app = Flask(__name__)
