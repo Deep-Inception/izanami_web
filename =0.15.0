@@ -1,31 +1,0 @@
-Collecting package metadata (repodata.json): ...working... done
-Solving environment: ...working... done
-
-## Package Plan ##
-
-  environment location: /Users/SatoshiKonishi/anaconda3
-
-  added / updated specs:
-    - werkzeug
-
-
-The following packages will be downloaded:
-
-    package                    |            build
-    ---------------------------|-----------------
-    openssl-1.1.1f             |       h1de35cc_0         3.5 MB
-    werkzeug-1.0.0             |             py_0         243 KB
-    ------------------------------------------------------------
-                                           Total:         3.7 MB
-
-The following packages will be UPDATED:
-
-  openssl                                 1.1.1e-h1de35cc_0 --> 1.1.1f-h1de35cc_0
-  werkzeug           pkgs/main/osx-64::werkzeug-0.14.1-py3~ --> pkgs/main/noarch::werkzeug-1.0.0-py_0
-
-
-Proceed ([y]/n)? 
-
-Downloading and Extracting Packages
-openssl-1.1.1f       | 3.5 MB    |            |   0% openssl-1.1.1f       | 3.5 MB    |            |   0% openssl-1.1.1f       | 3.5 MB    | 8          |   8% openssl-1.1.1f       | 3.5 MB    | 9          |  10% openssl-1.1.1f       | 3.5 MB    | #1         |  12% openssl-1.1.1f       | 3.5 MB    | #4         |  14% openssl-1.1.1f       | 3.5 MB    | #7         |  18% openssl-1.1.1f       | 3.5 MB    | #9         |  20% openssl-1.1.1f       | 3.5 MB    | ##7        |  27% openssl-1.1.1f       | 3.5 MB    | ###1       |  31% openssl-1.1.1f       | 3.5 MB    | ###5       |  36% 
-werkzeug-1.0.0       | 243 KB    |            |   0% werkzeug-1.0.0       | 243 KB    | 6          |   7% werkzeug-1.0.0       | 243 KB    | ###2       |  33% werkzeug-1.0.0       | 243 KB    | #####9     |  59% 
