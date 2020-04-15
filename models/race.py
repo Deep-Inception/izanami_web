@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime
-from models.database import Base
+from config.database import Base
 from datetime import datetime
 
 
@@ -7,12 +7,24 @@ class Race(Base):
     __tablename__ = 'race'
     id = Column(Integer, primary_key=True)
     url = Column(String(128), unique=True)
-    deadline = Column(String(128), unique=False)
+    place = Column(String(32), unique=False)
+    race_number = Column(String(32), unique=False)
+    deadline = Column(DateTime, unique=False)
+    created_at = Column(DateTime, unique=False, default=datetime.now())
 
-    def __init__(self, race_dto=None):
-        if race_dto:
-            self.url = race_dto.url
-            self.deadline = race_dto.deadline
+
+    def __init__(self, url=None, place=None, race_number=None, deadline=None):
+        self.url = url
+        self.place = place
+        self.race_number = race_number
+        self.deadline = deadline
 
     def __repr__(self):
         return self.url
+
+    def set_params_from_dto(self, dto):
+        self.url = dto.url
+        self.place = dto.place
+        self.race_number = dto.race_number
+        self.deadline = dto.deadline
+        return self
