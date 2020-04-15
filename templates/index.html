@@ -3,6 +3,7 @@
     <head>
         <title>{{name}}</title>
     </head>
+    <a href="/logout">ログアウトする</a>
     <body>
     <h1>Deep Inception</h1>
     <form action="/index" method="POST">
@@ -15,13 +16,20 @@
         <input type="text" name="body" placeholder="body">
         <input type="submit" value="add">
     </form>
-    <form action="/update" method="POST">
+    <form action="/update" method="POST" id="update">
         <input type="text" name="title" placeholder="title">
         <input type="text" name="body" placeholder="body">
         <input type="submit" value="update">
-        {% for onegai in all_onegai %}
-        <div><input type="radio" name="update" value={{onegai.id}}>{{onegai.title}}:{{onegai.body}}({{onegai.date}})</input></div>
-        {% endfor %}
     </form>
+    <form action="/delete" method="post" id="delete">
+        <input type="submit" value="Delete Selected All Onegai">
+    </form>
+        {% for onegai in all_onegai %}
+        <div>
+            <input type="radio" name="update" form="update" value={{onegai.id}}>
+            <input type="checkbox" name="delete" form="delete" value={{onegai.id}}>
+            {{onegai.title}}：{{onegai.body}}（{{onegai.date}}）
+        </div>
+        {% endfor %}
     </body>
 </html>
