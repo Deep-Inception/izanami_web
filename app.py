@@ -5,6 +5,9 @@ from datetime import datetime
 import key
 from hashlib import sha256
 
+from views.batch import batch_app
+app.register_blueprint(batch_app, url_prefix='/batch')
+
 app = Flask(__name__)
 app.secret_key = key.SECRET_KEY
 
