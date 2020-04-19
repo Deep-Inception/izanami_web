@@ -13,5 +13,5 @@ Base.query = db_session.query_property()
 
 
 def init_db():
-    import models.model
+    from models import model, race
     Base.metadata.create_all(bind=engine)

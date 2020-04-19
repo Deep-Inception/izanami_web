@@ -5,6 +5,9 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+from views.batch import batch_app
+app.register_blueprint(batch_app, url_prefix='/batch')
+
 @app.route("/")
 @app.route("/index")
 def index():
