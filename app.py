@@ -5,11 +5,11 @@ from datetime import datetime
 import key
 from hashlib import sha256
 
-from views.batch import batch_app
-app.register_blueprint(batch_app, url_prefix='/batch')
-
 app = Flask(__name__)
 app.secret_key = key.SECRET_KEY
+
+from views.batch import batch_app
+app.register_blueprint(batch_app, url_prefix='/batch')
 
 @app.route("/")
 @app.route("/index")
@@ -91,7 +91,6 @@ def registar():
 def logout():
     session.pop("user_name", None)
     return redirect(url_for("top",status="logout"))
-
 
 if __name__ == "__main__":
     app.run(debug=True)
