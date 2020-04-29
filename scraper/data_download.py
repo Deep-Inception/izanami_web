@@ -1,36 +1,51 @@
 import time
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-import chromedriver_binary
-import os, datetime
-date = datetime.date.today()
-date_format = "%d"
-day_str = date.strftime(date_format)
+import os, datetime, requests
+import lhafile
 
-# os.getcwd()で出力できるのはこのファイルのディレクトリのパスではなく、カレントディレクトリ
-path = os.getcwd() + "/tmp"
-chrome_options = Options()
-# chrome_options.add_argument('--headless')
-prefs = {}
-prefs['download.default_directory'] = path
-prefs['download.directory_upgrade'] = True
-prefs['download.prompt_for_download'] = False
-chrome_options.add_experimental_option("prefs",prefs)
-driver = webdriver.Chrome(chrome_options=chrome_options)
+def download_lzh(date):
+    #変数初期化
+    date_format = "%d"
+    day_str = date.strftime(date_format)
+    baseurl = "http://www1.mbrace.or.jp/od2/B/"
+    url = ""
+    file_name = ""
+    year = date.year - 2000
+    mon = date.month
+    first = ""
+    second = ""
+    day = date.day
 
-driver.get('http://www1.mbrace.or.jp/od2/B/dindex.html')
-wait = WebDriverWait(driver, 100)
-wait.until(EC.frame_to_be_available_and_switch_to_it((By.NAME, "menu")))
-drop_down = driver.find_element_by_name("MONTH")
-# 今月は一番上の選択肢なので、特に指定する必要なし
-drop_down.send_keys('202004')
-time.sleep(10)
-driver.switch_to.default_content()
-time.sleep(2)
-wait.until(EC.frame_to_be_available_and_switch_to_it((By.NAME, "JYOU")))
-driver.find_element_by_xpath("//input[@value='%s']" % day_str).click()
-time.sleep(5)
-driver.find_element_by_xpath("//input[@value='ダウンロード開始']").click()
+    time.sleep(1)
+    first = "20" + '{0:02d}'.format(year) + '{0:02d}'.format(mon)
+    second = "/b" + '{0:02d}'.format(year)  + '{0:02d}'.format(mon) + '{0:02d}'.format(day)
+    #リンク作成
+    url = baseurl + first + second +  ".lzh"
+    print(url)
+    file_name = url.split("/")[-1]
+    r = requests.get(url)
+    # 成功したら、書き込み
+    if r is not None:
+        if r.status_code == 200:
+            f = open('tmp/%s' % file_name,'wb')
+            f.write(r.content)
+            f.close()
+            print( url+ "を取得しました")
+        else :
+            print(file_name + "がダウンロードできませんでした")
+    return file_name
+
+def unpacked(filename):
+    lzhfile_path = "tmp/%s" % filename
+    f = lhafile.Lhafile(lzhfile_path)
+    unpackedpath = lzhfile_path.replace(".lzh", ".txt")
+    unpackedname = os.path.basename(unpackedpath)
+    if not os.path.exists(unpackedpath):
+        print("Unpacking", lzhfile_path)
+        f = lhafile.Lhafile(lzhfile_path)
+        info = f.infolist()
+        unpacked_name = info[0].filename
+        fileobj = open(unpackedpath, "w")
+        fileobj.write(f.read(unpacked_name).decode(encoding='shift-jis'))
+        fileobj.close()
+        os.remove(lzhfile_path)
+    return unpackedname
