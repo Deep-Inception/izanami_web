@@ -6,10 +6,11 @@ from datetime import datetime
 class Race(Base):
     __tablename__ = 'race'
     id = Column(Integer, primary_key=True)
-    url = Column(String(128), unique=True)
     place = Column(String(32), unique=False)
     race_number = Column(String(32), unique=False)
     deadline = Column(DateTime, unique=False)
+    distance = Column(Integer, unique=False)
+    title_name = Column(String(256), unique=False)
     created_at = Column(DateTime, unique=False, default=datetime.now())
 
 
@@ -27,4 +28,6 @@ class Race(Base):
         self.place = dto.place
         self.race_number = dto.race_number
         self.deadline = dto.deadline
+        self.distance = dto.distance
+        self.title_name = dto.title_name
         return self

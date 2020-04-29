@@ -16,3 +16,5 @@ beautifulsoup4 4.8.2
 python-chromedriver-binary 81.0.4044.20.0
 
 selenium 3.141.0
+
+lhafile 0.2.2
