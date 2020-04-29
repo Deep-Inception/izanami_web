@@ -19,7 +19,7 @@ def index():
         all_onegai = OnegaiContent.query.all()
         return render_template("index.html",name=name,all_onegai=all_onegai)
     else:
-        return redirect(url_for("top",status="logout"))
+        return redirect(url_for("top",status="new"))
 
 @app.route("/add",methods=["post"])
 def add():
