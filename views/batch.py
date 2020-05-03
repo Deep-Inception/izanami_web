@@ -1,31 +1,49 @@
 # vim:fileencoding=utf8
 from flask import Blueprint
 from config.database import db_session
-import sys
+import sys, datetime
 sys.path.append('../')
 sys.path.append('../models/')
 sys.path.append('../scraper/')
 from models.race import Race
-from scraper import race_index
+from models.timetable_racer import TimetableRacer
+from scraper import data_download, txt_to_dto_timetable
+import datetime
 
-batch_app = Blueprint('batch', __name__, template_folder='../templates', static_folder='./static')
+batch_app = Blueprint('batch', __name__, template_folder='./templates', static_folder='./static')
 
+# 当日のレース予定インポート　http://127.0.0.1:5000/batch/race_index/
+
+# 重複でインポートしようとしてエラーにならないように一件ずつコミット
 def commit(race):
     try:
         db_session.add(race)
         db_session.commit()
     except:
-        print ("import error! %s : %s" % (race.place, race.race_number))
+        print ("import error!")
     finally:
         db_session.remove()
 
+def find_race_id_by_dto(dto):
+    race = Race.query.filter_by(place=dto.place, race_number=dto.race_number, deadline=dto.deadline).first()
+    if race:
+        return race.id
+    else:
+        print("no race %s %s %s" % (dto.place, dto.race_number, dto.deadline) )
+        return None
+
 @batch_app.route('/race_index/')
 def index():
-    race = Race()
-    race_list_indexes = race_index.run()
-    race_dto_list = []
-    for race_list_index in race_list_indexes:
-        if race_list_index.has_race(): race_dto_list.extend(race_list_index.races)
+    today = datetime.date.today()
+    lzh_filename = data_download.download_lzh(today)
+    filename = data_download.unpacked(lzh_filename)
+    file = txt_to_dto_timetable.open_file(filename)
+    race_dto_list = txt_to_dto_timetable.get_data(file)
     races = [Race().set_params_from_dto(race_dto) for race_dto in race_dto_list]
-    for race in races: commit(race)
-    return "%i races are imported." % len(race_dto_list)
+    for race in races: commit(race) #レースの保存
+    for race in race_dto_list: #レーサーの保存
+        race.set_race_id(find_race_id_by_dto(race))
+        racers = [TimetableRacer().set_params_from_dto(racer_dto) for racer_dto in race.racers ]
+        for racer in racers: commit(racer)
+
+    return "ok"
