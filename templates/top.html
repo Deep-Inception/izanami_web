@@ -1,24 +1,51 @@
 <!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
+<html>
+  <head>
+    <meta charset="utf-8">
     <title>Login</title>
-</head>
-<body>
-    <h1>ログイン</h1>
-    {% if status == "user_notfound" %}
-    <p>ユーザが見つかりません。新規登録しましょう。</p>
-    {% elif status == "wrong_password" %}
-    <p>パスワードが間違っています。</p>
-    {% elif status == "logout" %}
-    <p>ログアウトが完了しました。</p>
-    {% elif status == "new" %}
-    <p>ようこそ</p>
-    {% endif %}
-    <form action="/login" method="post">
-        <input type="text" name="user_name" placeholder="user name">
-        <input type="password" name="password" placeholder="password">
-        <input type="submit" value="Login">
-    </form>
-    <a href="/newcomer">新規登録はこちら</a>
-</body>
+    <link rel="stylesheet" href="../static/stylesheet.css">
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-logo">Izanami</div>
+    <div class="main">
+      <div class="copy-container">
+        <h1>競艇結果AI予測</h1>
+      </div>
+
+      <div class="contents">
+        <h3 class="section-title">ログイン</h3>
+        {% if status == "user_notfound" %}
+        <p>ユーザが見つかりません。新規登録しましょう。</p>
+        {% elif status == "wrong_password" %}
+        <p>パスワードが間違っています。</p>
+        {% elif status == "logout" %}
+        <p>ログアウトが完了しました。</p>
+        {% elif status == "new" %}
+        <p>ようこそ</p>
+        {% endif %}
+        <form action="/login" method="post">
+          <div>
+            <input type="text" name="user_name" placeholder="user name">
+          </div>
+          <div>
+            <input type="password" name="password" placeholder="password">
+          </div>
+          <div>
+            <input class="login-submit" type="submit" value="Login">
+          </div>
+        </form>
+        <a href="/newcomer">新規登録はこちら</a>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">DeepInception</div>
+      <div class="footer-list">
+        <ul>
+          <li>お問い合わせ</li>
+        </ul>
+      </div>
+    </div>
+  </body>
 </html>
