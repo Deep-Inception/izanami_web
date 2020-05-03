@@ -85,8 +85,8 @@ def create_timetable_racer(l):
     return racer
 
 class RaceDTO:
-    def __init__(self, url=None, place=None, race_number=None, deadline=None, distance=None, title_name=None):
-        self.id = ModuleNotFoundError
+    def __init__(self, place=None, race_number=None, deadline=None, distance=None, title_name=None):
+        self.id = None
         self.place = place
         self.race_number = race_number
         self.deadline = deadline
