@@ -37,6 +37,7 @@ def download_lzh(date):
 def unpacked(filename):
     lzhfile_path = "tmp/%s" % filename
     f = lhafile.Lhafile(lzhfile_path)
+    print(lzhfile_path)
     unpackedpath = lzhfile_path.replace(".lzh", ".txt")
     unpackedname = os.path.basename(unpackedpath)
     if not os.path.exists(unpackedpath):

@@ -53,7 +53,7 @@ def get_data(f):
                     # print(racer.__dict__)
                     l = f.readline()
     print('%i レースの情報を取得しました' % len(rase_list))
-    print(len(rase_list[0].racers))
+    return rase_list
 
 def cast_time(time_str):
     hour = str(int(time_str[0:2])).zfill(2)
@@ -85,8 +85,8 @@ def create_timetable_racer(l):
     return racer
 
 class RaceDTO:
-    def __init__(self, url=None, place=None, race_number=None, deadline=None, distance=None, title_name=None):
-        self.url = url
+    def __init__(self, place=None, race_number=None, deadline=None, distance=None, title_name=None):
+        self.id = None
         self.place = place
         self.race_number = race_number
         self.deadline = deadline
@@ -94,8 +94,12 @@ class RaceDTO:
         self.title_name = title_name
         self.racers = []
 
+    def set_race_id(self, id):
+        for racer in self.racers: racer.race_id = id
+
 class TimeTableRacer:
     def __init__(self, couse=None, name=None, racer_id=None, rank=None, age=None, weight=None, moter_id=None, boat_id=None):
+        self.race_id = None
         self.couse = couse
         self.name = name
         self.racer_id = racer_id

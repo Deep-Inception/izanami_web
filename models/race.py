@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime
+from sqlalchemy.schema import UniqueConstraint
 from config.database import Base
 from datetime import datetime
 
@@ -12,7 +13,7 @@ class Race(Base):
     distance = Column(Integer, unique=False)
     title_name = Column(String(256), unique=False)
     created_at = Column(DateTime, unique=False, default=datetime.now())
-
+    __table_args__ = (UniqueConstraint("place", "race_number", "deadline", name="unique_race"),)
 
     def __init__(self, url=None, place=None, race_number=None, deadline=None):
         self.url = url
@@ -24,7 +25,6 @@ class Race(Base):
         return self.url
 
     def set_params_from_dto(self, dto):
-        self.url = dto.url
         self.place = dto.place
         self.race_number = dto.race_number
         self.deadline = dto.deadline
