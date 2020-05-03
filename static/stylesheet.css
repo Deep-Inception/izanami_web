@@ -44,6 +44,8 @@ li {
 
 .contents p {
   font-size: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 input {
@@ -64,18 +66,19 @@ input {
 
 .footer {
   background-color: #2f5167;
+  height: 90px;
   color: #fff;
-  height: 50px;
-  padding: 40px;
 }
 
 .footer-logo {
   float: left;
-  font-size: 32px;
+  font-size: 36px;
+  padding: 20px;
 }
 
 .footer-list {
   float: right;
+  padding: 20px;
 }
 
 .footer-list li {
