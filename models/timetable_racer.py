@@ -28,6 +28,8 @@ class TimetableRacer(Base):
     result_4 = Column(String(32), unique=False)
     result_5 = Column(String(32), unique=False)
     result_6 = Column(String(32), unique=False)
+    exhibition_time = Column(Float, unique=False)
+    tilt = Column(Float, unique=False)
     created_at = Column(DateTime, unique=False, default=datetime.now())
     __table_args__ = (UniqueConstraint("race_id", "racer_id", name="unique_racer"),)
 
@@ -60,4 +62,12 @@ class TimetableRacer(Base):
         self.result_4 = dto.result_4
         self.result_5 = dto.result_5
         self.result_6 = dto.result_6
+        return self
+
+    def has_before_info(self):
+        return self.exhibition_time is not None or self.tilt is not None
+
+    def set_before_info(self, dto):
+        self.exhibition_time = dto.exhibition
+        self.tilt = dto.tilt
         return self
