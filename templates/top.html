@@ -4,17 +4,30 @@
     <meta charset="utf-8">
     <title>Login</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+
   </head>
   <body>
-    <div class="header">
-      <div class="header-logo">Izanami</div>
-    <div class="main">
-      <div class="copy-container">
+    <header>
+      <div class="container">
+        <div class="header-left">
+          <div class="header-logo">Izanami</div>
+        </div>
+        <div class="header-right">
+          <a href="#" class="login">ログイン</a>
+        </div>
+      </div>
+    </header>
+    <div class="top-wrapper">
+      <div class="container">
         <h1>競艇結果AI予測</h1>
       </div>
+    </div>
+    <div class="login-wrapper">
+      <div class="container">
+        <div class="heading">
+          <h2 >ログイン</h2>
+        </div>
 
-      <div class="contents">
-        <h3 class="section-title">ログイン</h3>
         {% if status == "user_notfound" %}
         <p>ユーザが見つかりません。新規登録しましょう。</p>
         {% elif status == "wrong_password" %}
@@ -26,20 +39,21 @@
         {% endif %}
         <form action="/login" method="post">
           <p><input type="text" name="user_name" placeholder="user name"></p>
-          <p><input type="password" name="password" placeholder="password"><p>
-          <p><input class="login-submit" type="submit" value="Login"><p>
+          <p><input type="password" name="password" placeholder="password"></p>
+          <p><input class="login-submit" type="submit" value="Login"></p>
         </form>
         <a href="/newcomer">新規登録はこちら</a>
       </div>
     </div>
-
-    <div class="footer">
-      <div class="footer-logo">Deep Inception</div>
-      <div class="footer-list">
-        <ul>
-          <li>お問い合わせ</li>
-        </ul>
+    <footer>
+      <div class="container">
+        <div class="footer-logo">Deep Inception</div>
+        <div class="footer-list">
+          <ul>
+            <li>お問い合わせ</li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </footer>
   </body>
 </html>
