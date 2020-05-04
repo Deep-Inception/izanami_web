@@ -5,9 +5,9 @@ from datetime import datetime
 
 
 class TimetableRacer(Base):
-    __tablename__ = 'timetable_racer'
+    __tablename__ = "timetable_racer"
     id = Column(Integer, primary_key=True)
-    race_id = Column(Integer, ForeignKey('race.id'), nullable=False)
+    race_id = Column(Integer, ForeignKey("race.id"), nullable=False)
     couse = Column(Integer, unique=False)
     racer_id = Column(Integer, unique=False)
     name = Column(String(64), unique=False)

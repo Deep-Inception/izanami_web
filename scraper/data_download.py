@@ -16,8 +16,8 @@ def download_lzh(date):
     day = date.day
 
     time.sleep(1)
-    first = "20" + '{0:02d}'.format(year) + '{0:02d}'.format(mon)
-    second = "/b" + '{0:02d}'.format(year)  + '{0:02d}'.format(mon) + '{0:02d}'.format(day)
+    first = "20" + "{0:02d}".format(year) + "{0:02d}".format(mon)
+    second = "/b" + "{0:02d}".format(year)  + "{0:02d}".format(mon) + "{0:02d}".format(day)
     #リンク作成
     url = baseurl + first + second +  ".lzh"
     file_name = url.split("/")[-1]
@@ -25,7 +25,7 @@ def download_lzh(date):
     # 成功したら、書き込み
     if r is not None:
         if r.status_code == 200:
-            f = open('tmp/%s' % file_name,'wb')
+            f = open("tmp/%s" % file_name,"wb")
             f.write(r.content)
             f.close()
             print( url+ "を取得しました")
@@ -45,7 +45,7 @@ def unpacked(filename):
         info = f.infolist()
         unpacked_name = info[0].filename
         fileobj = open(unpackedpath, "w")
-        fileobj.write(f.read(unpacked_name).decode(encoding='shift-jis'))
+        fileobj.write(f.read(unpacked_name).decode(encoding="shift-jis"))
         fileobj.close()
         os.remove(lzhfile_path)
     return unpackedname

@@ -11,9 +11,8 @@ def get_data(url):
 # BeforeInfoページの情報を保持するクラス
 class BeforeInfo():
     def __init__(self, request):
-        # self.text = request.text
-        self.soup = BeautifulSoup(request.text, 'html.parser')
+        self.soup = BeautifulSoup(request.text, "html.parser")
         self.racers = []
 
     def scrape(self):
-        self.racers = [BeforeInfoRacer(elm) for elm in self.soup.select('div.table1 tbody.is-fs12')]
+        self.racers = [BeforeInfoRacer(elm) for elm in self.soup.select("div.table1 tbody.is-fs12")]

@@ -10,7 +10,7 @@ class BeforeInfoRacer:
     def __init__(self, elm):
         self.elm = elm
         self.number = None
-        self.weight = None
+        # self.weight = None
         self.exhibition = None
         self.tilt = None
         self.scrape()
@@ -20,10 +20,10 @@ class BeforeInfoRacer:
 
     def _pase_elm(self):
         _tds = self.elm.select_one("tr").select("td")
-        self.weight = _tds[BeforeInfoRacer.WEIGHT_INDEX].get_text()
+        # self.weight = _tds[BeforeInfoRacer.WEIGHT_INDEX].get_text()
         self.exhibition = float(_tds[BeforeInfoRacer.EXHIBITION_INDEX].get_text())
         self.tilt = _tds[BeforeInfoRacer.TILT_INDEX].get_text()
-        _src = _tds[BeforeInfoRacer.NUMBER_INDEX].select_one("img")['src']
+        _src = _tds[BeforeInfoRacer.NUMBER_INDEX].select_one("img")["src"]
         self.number = self._parse_src(_src)
 
     def _parse_src(self, string):
