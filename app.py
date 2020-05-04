@@ -4,6 +4,8 @@ from config.database import db_session
 from datetime import datetime
 import key
 from hashlib import sha256
+import sys
+import logging.config
 
 app = Flask(__name__)
 app.secret_key = key.SECRET_KEY
@@ -93,4 +95,13 @@ def logout():
     return redirect(url_for("top",status="logout"))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    debug = 1
+    if len(sys.argv) > 1 and sys.argv[1] == "production":
+        debug = 0
+
+    if debug:
+        logging.config.fileConfig('config/log_conf_debug.ini')
+    else:
+        logging.config.fileConfig('config/log_conf.ini')
+        app.logger.info('PRODUCTION!')
+    app.run(debug=debug)

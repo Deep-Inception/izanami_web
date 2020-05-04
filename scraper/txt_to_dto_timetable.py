@@ -52,7 +52,6 @@ def get_data(f):
                     race.racers.append(racer)
                     # print(racer.__dict__)
                     l = f.readline()
-    print('%i レースの情報を取得しました' % len(rase_list))
     return rase_list
 
 def cast_time(time_str):

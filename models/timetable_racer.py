@@ -35,6 +35,9 @@ class TimetableRacer(Base):
     def __init__(self):
         self
 
+    def info(self):
+        return "race_id %s, racer_id %s" % (self.race_id, self.racer_id)
+
     def set_params_from_dto(self, dto):
         self.race_id = dto.race_id
         self.couse = dto.couse
