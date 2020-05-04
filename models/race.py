@@ -34,11 +34,6 @@ class Race(Base):
         self.title_name = dto.title_name
         return self
 
-    def should_get_before_info(self):
-        now = datetime.now()
-        racers = self.timetable_racers
-        return now < self.deadline
-
     def before_info_url(self):
         rno = self.race_number
         jcd = self.place
