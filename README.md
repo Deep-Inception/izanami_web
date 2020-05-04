@@ -18,3 +18,11 @@ python-chromedriver-binary 81.0.4044.20.0
 selenium 3.141.0
 
 lhafile 0.2.2
+
+## 起動方法
+
+* debug
+python app.py
+
+* production
+prython app.py production

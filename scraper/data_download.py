@@ -20,7 +20,6 @@ def download_lzh(date):
     second = "/b" + '{0:02d}'.format(year)  + '{0:02d}'.format(mon) + '{0:02d}'.format(day)
     #リンク作成
     url = baseurl + first + second +  ".lzh"
-    print(url)
     file_name = url.split("/")[-1]
     r = requests.get(url)
     # 成功したら、書き込み

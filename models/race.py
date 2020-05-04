@@ -21,8 +21,8 @@ class Race(Base):
         self.race_number = race_number
         self.deadline = deadline
 
-    def __repr__(self):
-        return self.url
+    def info(self):
+        return "place %s, race_number %s" % (self.place, self.race_number)
 
     def set_params_from_dto(self, dto):
         self.place = dto.place
