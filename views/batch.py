@@ -31,7 +31,7 @@ def find_race_id_by_dto(dto):
     if race:
         return race.id
     else:
-        logger.error("no race %s %s %s" % (dto.place, dto.race_number, dto.deadline) )
+        logger.error("place:%s, race_number:%s, deadline:%s のレースが見つかりません" % (dto.place, dto.race_number, dto.deadline.strftime("%Y/%m/%d %H:%M:%S")) )
         return None
 
 @batch_app.route('/race_index/')
