@@ -24,21 +24,21 @@ def run():
 
 # ある日のあるレース会場のレース情報を保持するクラス
 class RaceIndex:
-    base_url = 'http://www.boatrace.jp'
+    base_url = "http://www.boatrace.jp"
     def __init__(self, request):
         self.text = request.text
-        self.soup = BeautifulSoup(request.text, 'html.parser')
+        self.soup = BeautifulSoup(request.text, "html.parser")
         self.races = []
 
     def scrape(self):
-        race_elms = self.soup.select('div.contentsFrame1 div.table1 tbody')
+        race_elms = self.soup.select("div.contentsFrame1 div.table1 tbody")
         for race_elm in race_elms:
-            time_str = race_elm.select('td')[1].text
-            url_param =  race_elm.select('td a')[0]['href']
+            time_str = race_elm.select("td")[1].text
+            url_param =  race_elm.select("td a")[0]["href"]
             place, race_number, date_str = self.parse_url(url_param)
-            deadline = datetime.datetime.strptime(date_str + time_str, '%Y%m%d%H:%M')
+            deadline = datetime.datetime.strptime(date_str + time_str, "%Y%m%d%H:%M")
             dto = RaceDTO(
-                url=RaceIndex.base_url + race_elm.select('td a')[0]['href'],
+                url=RaceIndex.base_url + race_elm.select("td a")[0]["href"],
                 deadline=deadline,
                 place=place,
                 race_number=race_number
@@ -49,9 +49,9 @@ class RaceIndex:
         return len(self.races) > 0
 
     def parse_url(self, string):
-        race_number = re.findall('.*rno=(.*)&jcd*', string)[0]
-        place = re.findall('.*jcd=(.*)&hd*', string)[0]
-        date_str = re.findall('.*hd=(.*)', string)[0]
+        race_number = re.findall(".*rno=(.*)&jcd*", string)[0]
+        place = re.findall(".*jcd=(.*)&hd*", string)[0]
+        date_str = re.findall(".*hd=(.*)", string)[0]
         return (place, race_number, date_str)
 
 class RaceDTO:

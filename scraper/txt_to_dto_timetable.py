@@ -31,10 +31,10 @@ def get_data(f):
             f.readline() # 空行
             # レースごとの繰り返し
         if re.search(r"Ｒ",r) and re.search(r"Ｈ",r):
-                race_number = int(re.findall('(.*)Ｒ', r)[0])
-                distance = int(re.findall('Ｈ(.*)ｍ', r)[0])
-                time = re.findall('電話投票締切予定(.*：.*)', r)[0]
-                deadline = datetime.datetime.strptime("20" + date_str + cast_time(time), '%Y%m%d%H:%M')
+                race_number = int(re.findall("(.*)Ｒ", r)[0])
+                distance = int(re.findall("Ｈ(.*)ｍ", r)[0])
+                time = re.findall("電話投票締切予定(.*：.*)", r)[0]
+                deadline = datetime.datetime.strptime("20" + date_str + cast_time(time), "%Y%m%d%H:%M")
                 race = RaceDTO(place=place, race_number=race_number,deadline=deadline, distance=distance, title_name=race_name)
                 rase_list.append(race)
                 f.readline() # 空行

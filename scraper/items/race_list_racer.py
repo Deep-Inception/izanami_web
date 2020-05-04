@@ -44,7 +44,7 @@ class RaceListRacer:
         self.name = elm.select_one("a").text
         _dtl = elm.select_one("div").text
         _dtl = _dtl.splitlines()
-        self.racer_id = _dtl[1].strip(' ')
+        self.racer_id = _dtl[1].strip(" ")
         self.rank = _dtl[2].strip(' ''/')
         _dtl2 = elm.select("div")[-1].text.splitlines()
         self.age = self._parse_age(_dtl2[2].strip())
@@ -52,16 +52,16 @@ class RaceListRacer:
 
 
     def _parse_age(self, string):
-        return re.findall('(.*)歳', string)[0]
+        return re.findall("(.*)歳", string)[0]
 
 
     def _parse_weight(self, string):
-        return re.findall('.*/(.*)kg', string)[0]
+        return re.findall(".*/(.*)kg", string)[0]
 
     def _set_fl(self, elm):
         _dtl = elm.text.splitlines()
-        self.f_score = re.findall('F(.*)', _dtl[1].strip())[0]
-        self.l_score = re.findall('L(.*)', _dtl[2].strip())[0]
+        self.f_score = re.findall("F(.*)", _dtl[1].strip())[0]
+        self.l_score = re.findall("L(.*)", _dtl[2].strip())[0]
         self.st_ave = _dtl[3].strip()
 
 
