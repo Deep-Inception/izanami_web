@@ -1,9 +1,15 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime
+from sqlalchemy import Column, Integer, String, Text, DateTime, Enum
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import UniqueConstraint
 from config.database import Base
 from datetime import datetime
+import enum
 
+@enum.unique
+class RaceStatusEnum(enum.Enum):
+    BEFORE = "BEFORE" # レース前
+    IMMEDIATELY_BEFORE = "IMMEDIATELY_BEFORE" # 直前情報入手済
+    FINISHED = "FINISHED" # レース結果取得済
 
 class Race(Base):
     __tablename__ = "race"
@@ -16,6 +22,7 @@ class Race(Base):
     created_at = Column(DateTime, unique=False, default=datetime.now())
     __table_args__ = (UniqueConstraint("place", "race_number", "deadline", name="unique_race"),)
     timetable_racers = relationship("TimetableRacer", backref="race", lazy=True, order_by="TimetableRacer.couse")
+    status = Column(Enum(RaceStatusEnum), nullable=False, default=RaceStatusEnum.BEFORE)
 
     def __init__(self, url=None, place=None, race_number=None, deadline=None):
         self.url = url
@@ -39,3 +46,9 @@ class Race(Base):
         jcd = self.place
         date_str = self.deadline.strftime("%Y%m%d")
         return "http://www.boatrace.jp/owpc/pc/race/beforeinfo?rno=%s&jcd=%s&hd=%s" % (rno, jcd, date_str)
+
+    def rase_result_url(self):
+        rno = self.race_number
+        jcd = self.place
+        date_str = self.deadline.strftime("%Y%m%d")
+        return "http://www.boatrace.jp/owpc/pc/race/raceresult?rno=%s&jcd=%s&hd=%s" % (rno, jcd, date_str)
