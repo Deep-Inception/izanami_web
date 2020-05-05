@@ -6,7 +6,7 @@ import sys, datetime
 sys.path.append("../")
 sys.path.append("../models/")
 sys.path.append("../scraper/")
-from models.race import Race
+from models.race import Race, RaceStatusEnum
 from models.timetable_racer import TimetableRacer
 from scraper import data_download, txt_to_dto_timetable, before_info
 import datetime
@@ -52,23 +52,25 @@ def index():
         for racer in racers: commit(racer)
     return "ok"
 
-# バッチ実行時点から20分内に締め切りを迎えるレースの直前情報を取得する
+# 20分内に締め切りを迎えるレースの直前情報を取得する
 @batch_app.route("/before_info/")
 def before_info_batch():
     now = datetime.datetime.now()
     time = datetime.timedelta(minutes=20)
     deadline_datetime = now + time
-    races = Race.query.filter(Race.deadline.between(now, deadline_datetime)).all()
+    races = Race.query.filter(deadline_datetime >= Race.deadline, Race.status == RaceStatusEnum.BEFORE).all()
     for race in races:
-        logger.debug(race.before_info_url())
-        before_info_data = before_info.get_data(race.before_info_url())
-        racers = race.timetable_racers
         try:
+            logger.debug(race.before_info_url())
+            before_info_data = before_info.get_data(race.before_info_url())
+            racers = race.timetable_racers
             # racerもbefore_info_racerも枠順に取得しているため一緒にイテレートできる
             for (racer, before_info_racer) in zip(racers, before_info_data.racers):
                 if not racer.has_before_info():
                     racer.set_before_info(before_info_racer)
                     db_session.commit()
+            race.status = RaceStatusEnum.IMMEDIATELY_BEFORE
+            db_session.commit()
         except:
             logger.error("直前情報の取得に失敗しました")
     return "ok"

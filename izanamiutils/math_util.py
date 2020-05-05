@@ -8,3 +8,16 @@ def softmax(ndarray):
 
 def reciprocal(pred):
     return np.reciprocal(pred)
+
+# スクレイピングのときに入る余分な文字の削除
+def trim_text(text):
+    if text.find(u'\xa0') >= 0:
+        text = text.replace(u'\xa0', u'')
+    return text
+
+def cast_to_float(text):
+    text = trim_text(text)
+    if text == None or len(text) == 0:
+        return None
+    else:
+        return float(text)
