@@ -1,53 +1,98 @@
 body {
+  margin: 0;
   font-family: "Meiryo";
+}
+
+a {
+  text-decoration: none;
 }
 
 li {
   list-style: none;
 }
 
-.header {
-  background-color: #26d0c9;
-  height: 90px;
-  margin: 10px;
+.container {
+  width: 1170px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+header {
+  background-color: rgba(34, 49, 52, 0.9);
+  height: 65px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+}
+
+.header-left {
+  float: left;
 }
 
 .header-logo {
-  float: left;
-  font-size: 36px;
-  padding: 20px;
+  font-size: 35px;
+  padding: 8px;
   color: #fff;
 }
 
-.main {
-  padding-top: 100px;
+.header-right {
+  float: right;
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: all 0.5s;
+}
+
+.header-right:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.header-right a {
+  line-height: 65px;
+  padding: 0 25px;
+  color: white;
+  display: block;
+}
+
+.top-wrapper {
+  padding: 80px 0 20px 0;
+  text-align: center;
+}
+
+.top-wrapper h1 {
+  opacity: 0.7;
+  font-size: 30px;
+  letter-spacing: 5px;
+}
+
+.login-wrapper {
+  height: 500px;
   padding-bottom: 30px;
-  padding-left: 50px;
-  padding-right: 50px;
+  text-align: center;
 }
 
-.copy-container h1 {
-  font-size: 30px
-}
-
-.contents {
-  height: 450px;
-  margin-top: 30px;
-}
-
-.section-title {
-  border-bottom: 2px solid #dee7ec;
-  font-size: 20px;
+.heading {
   padding-bottom: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-.contents p {
+.heading h2 {
+  font-weight: normal;
+}
+
+.login {
+  display: inline-block;
+  padding: 30px;
+  border: solid 1px #000000;
+}
+
+.login p {
   font-size: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 input {
-  width: 400px;
+  width: 200px;
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 20px;
@@ -55,27 +100,42 @@ input {
   border: 1px solid #dee7ec;
 }
 
-.login-submit {
-  width: 100px;
+.btn {
+  width: 240px;
   background-color: #dee7ec;
-  color: #889eab;
   margin-bottom: 30px;
+  opacity: 0.8;
+  cursor: pointer;
+  box-shadow: 0 5px #AAAAAA;
+  outline:0;
 }
 
-.footer {
-  background-color: #2f5167;
+.btn:hover {
+  opacity: 1;
+}
+
+.btn:active {
+  position: relative;
+  top: 7px;
+  box-shadow: none;
+}
+
+
+footer {
+  background-color: rgba(34, 49, 52, 0.9);
+  height: 90px;
   color: #fff;
-  height: 50px;
-  padding: 40px;
 }
 
 .footer-logo {
   float: left;
-  font-size: 32px;
+  font-size: 36px;
+  padding: 20px;
 }
 
 .footer-list {
   float: right;
+  padding: 20px;
 }
 
 .footer-list li {
