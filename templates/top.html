@@ -13,7 +13,7 @@
           <div class="header-logo">Izanami</div>
         </div>
         <div class="header-right">
-          <a href="#" class="login">ログイン</a>
+          <a href="#" class="header-login">ログイン</a>
         </div>
       </div>
     </header>
@@ -27,22 +27,24 @@
         <div class="heading">
           <h2 >ログイン</h2>
         </div>
-
-        {% if status == "user_notfound" %}
-        <p>ユーザが見つかりません。新規登録しましょう。</p>
-        {% elif status == "wrong_password" %}
-        <p>パスワードが間違っています。</p>
-        {% elif status == "logout" %}
-        <p>ログアウトが完了しました。</p>
-        {% elif status == "new" %}
-        <p>ようこそ</p>
-        {% endif %}
-        <form action="/login" method="post">
-          <p><input type="text" name="user_name" placeholder="user name"></p>
-          <p><input type="password" name="password" placeholder="password"></p>
-          <p><input class="login-submit" type="submit" value="Login"></p>
-        </form>
-        <a href="/newcomer">新規登録はこちら</a>
+        <div class="login">
+          {% if status == "user_notfound" %}
+          <p>ユーザが見つかりません。</p>
+          <p>新規登録してください。</p>
+          {% elif status == "wrong_password" %}
+          <p>パスワードが間違っています。</p>
+          {% elif status == "logout" %}
+          <p>ログアウトが完了しました。</p>
+          {% elif status == "new" %}
+          <p>ようこそ</p>
+          {% endif %}
+          <form action="/login" method="post">
+            <p><input type="text" name="user_name" placeholder="user name"></p>
+            <p><input type="password" name="password" placeholder="password"></p>
+            <p><input class="btn" type="submit" value="Login"></p>
+          </form>
+          <a href="/newcomer">新規登録はこちら</a>
+        </div>
       </div>
     </div>
     <footer>

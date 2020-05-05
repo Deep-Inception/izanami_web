@@ -79,7 +79,13 @@ header {
   font-weight: normal;
 }
 
-.contents p {
+.login {
+  display: inline-block;
+  padding: 30px;
+  border: solid 1px #000000;
+}
+
+.login p {
   font-size: 20px;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -94,12 +100,26 @@ input {
   border: 1px solid #dee7ec;
 }
 
-.login-submit {
+.btn {
   width: 240px;
   background-color: #dee7ec;
-  color: #889eab;
   margin-bottom: 30px;
+  opacity: 0.8;
+  cursor: pointer;
+  box-shadow: 0 5px #AAAAAA;
+  outline:0;
 }
+
+.btn:hover {
+  opacity: 1;
+}
+
+.btn:active {
+  position: relative;
+  top: 7px;
+  box-shadow: none;
+}
+
 
 footer {
   background-color: rgba(34, 49, 52, 0.9);
