@@ -8,7 +8,9 @@ sys.path.append("../models/")
 sys.path.append("../scraper/")
 from models.race import Race, RaceStatusEnum
 from models.timetable_racer import TimetableRacer
-from scraper import data_download, txt_to_dto_timetable, before_info
+from models.racer_result import RacerResult, QisqualificationEnum
+from models.result import Result
+from scraper import data_download, txt_to_dto_timetable, before_info, race_result
 import datetime
 
 batch_app = Blueprint("batch", __name__, template_folder="./templates", static_folder="./static")
@@ -25,7 +27,7 @@ def commit(race):
     except :
         logger.error("%s のインポートに失敗しました" % race.info())
     finally:
-        db_session.remove()
+        db_session.expunge_all()
 
 def find_race_id_by_dto(dto):
     race = Race.query.filter_by(place=dto.place, race_number=dto.race_number, deadline=dto.deadline).first()
@@ -73,4 +75,33 @@ def before_info_batch():
             db_session.commit()
         except:
             logger.error("直前情報の取得に失敗しました")
+    return "ok"
+
+@batch_app.route("/race_result/")
+def race_result_batch():
+    races = Race.query.filter(Race.status == RaceStatusEnum.IMMEDIATELY_BEFORE).all()
+    for race in races:
+        try:
+            logger.info(race.race_result_url())
+            race_rst = race_result.get_data(race.race_result_url())
+
+            if race_rst is not None: #まだレース結果が表示されていなければ次にいく
+                race_rst.race_id = race.id
+                result = Result().set_params_from_dto(race_rst)
+                db_session.add(result)
+                db_session.commit()
+                db_session.expunge(result)
+
+                racers = race.timetable_racers
+                for (rr, racer) in zip(race_rst.racer_results, racers):
+                    rr.timetable_racer_id = racer.id
+                    racer_result = RacerResult().set_params_from_dto(rr)
+                    db_session.add(racer_result)
+                    db_session.commit()
+                    db_session.expunge(racer_result)
+                race.status = RaceStatusEnum.FINISHED
+                db_session.commit()
+                db_session.expunge(race)
+        except:
+            logger.error("レース結果の取得に失敗しました")
     return "ok"
