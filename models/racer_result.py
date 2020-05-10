@@ -17,7 +17,7 @@ class QisqualificationEnum(enum.Enum):
     K = "欠" # 欠場
     T = "転" # 転覆
     R = "落" # 落水
-    L = "L" # 出遅れ
+    L = "Ｌ" # 出遅れ
     B = "妨" # 妨害失格
     E = "エ" # エンスト失格
     C = "沈" # 沈没失格
