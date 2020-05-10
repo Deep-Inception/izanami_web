@@ -1,3 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+.clear {
+  clear: left;
+  clear: right;
+}
+
+
 body {
   margin: 0;
   font-family: "Meiryo";
@@ -12,7 +22,8 @@ li {
 }
 
 .container {
-  width: 1170px;
+  width: 100%;
+  max-width: 1170px;
   padding: 0 15px;
   margin: 0 auto;
 }
@@ -101,7 +112,7 @@ input {
 }
 
 .btn {
-  width: 240px;
+  width: 200px;
   background-color: #dee7ec;
   margin-bottom: 30px;
   opacity: 0.8;
@@ -120,11 +131,10 @@ input {
   box-shadow: none;
 }
 
-
 footer {
   background-color: rgba(34, 49, 52, 0.9);
-  height: 90px;
   color: #fff;
+  margin-top: 20px;
 }
 
 .footer-logo {
@@ -135,9 +145,5 @@ footer {
 
 .footer-list {
   float: right;
-  padding: 20px;
-}
-
-.footer-list li {
-  padding-bottom: 10px;
+  font-size: 24px;
 }
