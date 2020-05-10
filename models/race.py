@@ -47,7 +47,7 @@ class Race(Base):
         date_str = self.deadline.strftime("%Y%m%d")
         return "http://www.boatrace.jp/owpc/pc/race/beforeinfo?rno=%s&jcd=%s&hd=%s" % (rno, jcd, date_str)
 
-    def rase_result_url(self):
+    def race_result_url(self):
         rno = self.race_number
         jcd = self.place
         date_str = self.deadline.strftime("%Y%m%d")

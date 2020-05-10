@@ -21,3 +21,10 @@ def cast_to_float(text):
         return None
     else:
         return float(text)
+
+def cast_to_int(text):
+    text = trim_text(text)
+    if text == None or len(text) == 0:
+        return None
+    else:
+        return int(text)
