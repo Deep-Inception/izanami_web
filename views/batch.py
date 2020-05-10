@@ -82,17 +82,17 @@ def race_result_batch():
     races = Race.query.filter(Race.status == RaceStatusEnum.IMMEDIATELY_BEFORE).all()
     for race in races:
         try:
-            logger.debug(race.race_result_url())
+            logger.info(race.race_result_url())
             race_rst = race_result.get_data(race.race_result_url())
 
-            race_rst.race_id = race.id
-            result = Result().set_params_from_dto(race_rst)
-            db_session.add(result)
-            db_session.commit()
-            db_session.expunge(result)
+            if race_rst is not None: #まだレース結果が表示されていなければ次にいく
+                race_rst.race_id = race.id
+                result = Result().set_params_from_dto(race_rst)
+                db_session.add(result)
+                db_session.commit()
+                db_session.expunge(result)
 
-            racers = race.timetable_racers
-            if race_rst: #まだレース結果が表示されていなければ次にいく
+                racers = race.timetable_racers
                 for (rr, racer) in zip(race_rst.racer_results, racers):
                     rr.timetable_racer_id = racer.id
                     racer_result = RacerResult().set_params_from_dto(rr)
