@@ -8,3 +8,4 @@ __pycache__/
 app/tmp/
 *.log
 *.log.*
+.pytest_cache
