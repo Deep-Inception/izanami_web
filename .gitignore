@@ -5,6 +5,6 @@ __pycache__/
 .vscode/
 .idea/
 *.lzh
-tmp/
-log/*.log
-log/*.log.*
+app/tmp/
+*.log
+*.log.*
