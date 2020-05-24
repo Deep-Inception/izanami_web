@@ -19,10 +19,20 @@ selenium 3.141.0
 
 lhafile 0.2.2
 
+pytest 5.4.2
+
 ## 起動方法
 
 * debug
-python app.py
+
+    $ python app.py
 
 * production
-prython app.py production
+
+    $ python app.py production
+
+## Test実行方法
+
+$ cd tests
+
+$ pytest

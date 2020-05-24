@@ -2,10 +2,8 @@ import time
 import os, datetime, requests
 import lhafile
 
-def download_lzh(date):
+def get_request(date):
     #変数初期化
-    date_format = "%d"
-    day_str = date.strftime(date_format)
     baseurl = "http://www1.mbrace.or.jp/od2/B/"
     url = ""
     file_name = ""
@@ -22,6 +20,19 @@ def download_lzh(date):
     url = baseurl + first + second +  ".lzh"
     file_name = url.split("/")[-1]
     r = requests.get(url)
+    return r
+
+def download_lzh(date):
+    #変数初期化
+    year = date.year - 2000
+    mon = date.month
+    first = ""
+    second = ""
+    day = date.day
+    time.sleep(1)
+    file_name = "b" + "{0:02d}".format(year)  + "{0:02d}".format(mon) + "{0:02d}".format(day) +  ".lzh"
+    r = get_request(date)
+
     # 成功したら、書き込み
     if r is not None:
         if r.status_code == 200:
