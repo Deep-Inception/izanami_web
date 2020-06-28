@@ -11,7 +11,9 @@ app = Flask(__name__)
 app.secret_key = key.SECRET_KEY
 
 from views.batch import batch_app
+from views.prediction import predict_app
 app.register_blueprint(batch_app, url_prefix='/batch')
+app.register_blueprint(predict_app, url_prefix='/predict')
 
 @app.route("/")
 @app.route("/index")

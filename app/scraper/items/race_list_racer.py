@@ -44,7 +44,7 @@ class RaceListRacer:
         self.name = elm.select_one("a").text
         _dtl = elm.select_one("div").text
         _dtl = _dtl.splitlines()
-        self.racer_id = _dtl[1].strip(" ")
+        self.racer_id = str(_dtl[1].strip(" "))
         self.rank = _dtl[2].strip(' ''/')
         _dtl2 = elm.select("div")[-1].text.splitlines()
         self.age = self._parse_age(_dtl2[2].strip())
@@ -67,9 +67,9 @@ class RaceListRacer:
 
     def _set_motor(self, elm):
         _dtl = elm.text.splitlines()
-        self.moter_id = int(_dtl[1].strip())
+        self.moter_id = str(int(_dtl[1].strip()))
 
 
     def _set_boat(self, elm):
         _dtl = elm.text.splitlines()
-        self.boat_id = int(_dtl[1].strip())
+        self.boat_id = str(int(_dtl[1].strip()))

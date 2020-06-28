@@ -1,15 +1,18 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Float
 from sqlalchemy.schema import UniqueConstraint
+from sqlalchemy.orm import relationship
 from config.database import Base
 from datetime import datetime
+import pandas as pd
+from .model_mixin import ModelMixin
 
 
-class TimetableRacer(Base):
+class TimetableRacer(Base, ModelMixin):
     __tablename__ = "timetable_racer"
     id = Column(Integer, primary_key=True)
     race_id = Column(Integer, ForeignKey("race.id"), nullable=False)
     couse = Column(Integer, unique=False)
-    racer_id = Column(Integer, unique=False)
+    racer_id = Column(String(32), unique=False)
     name = Column(String(64), unique=False)
     age = Column(Integer, unique=False)
     weight = Column(Integer, unique=False)
@@ -18,9 +21,9 @@ class TimetableRacer(Base):
     exacta_rate = Column(Float, unique=False)
     win_rate_place = Column(Float, unique=False)
     exacta_rate_place = Column(Float, unique=False)
-    moter_id = Column(Float, unique=False)
+    moter_id = Column(String(32), unique=False)
     exacta_rate_motor = Column(Float, unique=False)
-    boat_id = Column(Float, unique=False)
+    boat_id = Column(String(32), unique=False)
     exacta_rate_boat = Column(Float, unique=False)
     result_1 = Column(String(32), unique=False)
     result_2 = Column(String(32), unique=False)
@@ -31,6 +34,8 @@ class TimetableRacer(Base):
     exhibition_time = Column(Float, unique=False)
     tilt = Column(Float, unique=False)
     created_at = Column(DateTime, unique=False, default=datetime.now())
+    racer_result = relationship("RacerResult", backref="timetable_racer", lazy=True, uselist=False)
+    racer_prediction_dl = relationship("RacerPredictionDL", backref="timetable_racer", lazy=True, uselist=False)
     __table_args__ = (UniqueConstraint("race_id", "racer_id", name="unique_racer"),)
 
 
