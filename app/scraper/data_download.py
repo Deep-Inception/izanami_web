@@ -39,7 +39,7 @@ def download_lzh(date):
             f = open("tmp/%s" % file_name,"wb")
             f.write(r.content)
             f.close()
-            print( url+ "を取得しました")
+            print( file_name+ "を取得しました")
         else :
             print(file_name + "がダウンロードできませんでした")
     return file_name

@@ -9,3 +9,4 @@ app/tmp/
 *.log
 *.log.*
 .pytest_cache
+*.pickle

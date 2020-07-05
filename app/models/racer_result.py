@@ -4,6 +4,7 @@ from sqlalchemy.schema import UniqueConstraint
 from config.database import Base
 from datetime import datetime
 import enum, re
+from .model_mixin import ModelMixin
 
 class QisqualificationEnum(enum.Enum):
     L0 = "L0" # 選手責任外の出遅れ
@@ -38,7 +39,7 @@ def parse_prize_zen_to_han(str):
         return prize_dict[str]
 
 
-class RacerResult(Base):
+class RacerResult(Base, ModelMixin):
     __tablename__ = "racer_result"
     id = Column(Integer, primary_key=True)
     timetable_racer_id = Column(Integer, ForeignKey("timetable_racer.id"), nullable=False, unique=True)

@@ -4,6 +4,7 @@ from sqlalchemy.schema import UniqueConstraint
 from config.database import Base
 from datetime import datetime
 import enum
+from .model_mixin import ModelMixin
 
 @enum.unique
 class RaceStatusEnum(enum.Enum):
@@ -11,7 +12,7 @@ class RaceStatusEnum(enum.Enum):
     IMMEDIATELY_BEFORE = "IMMEDIATELY_BEFORE" # 直前情報入手済
     FINISHED = "FINISHED" # レース結果取得済
 
-class Race(Base):
+class Race(Base, ModelMixin):
     __tablename__ = "race"
     id = Column(Integer, primary_key=True)
     place = Column(String(32), unique=False)
