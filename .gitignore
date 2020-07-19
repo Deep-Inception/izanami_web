@@ -10,3 +10,4 @@ app/tmp/
 *.log.*
 .pytest_cache
 *.pickle
+/dist/
