@@ -106,4 +106,4 @@ if __name__ == "__main__":
     else:
         logging.config.fileConfig('config/log_conf.ini')
         app.logger.info('PRODUCTION!')
-    app.run(debug=debug)
+    app.run(debug=debug, host='0.0.0.0')
