@@ -7,7 +7,7 @@ services:
     ports: 
       - 3000:5000
     volumes: 
-      - ./app:/backend_app
+      - ./backend:/backend_app
 
   vue:
     container_name: vue-dev
@@ -15,4 +15,4 @@ services:
     ports: 
       - 8080:8080
     volumes: 
-      - ./frontend:/app
+      - ./frontend:/backend

@@ -1,4 +1,4 @@
-from app.scraper import result_download, data_download
+from backend.scraper import result_download, data_download
 import pytest
 import datetime
 

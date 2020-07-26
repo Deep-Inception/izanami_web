@@ -1,13 +1,14 @@
 import sys
 sys.path.append("../")
-sys.path.append("../app/")
+sys.path.append("../backend/")
 
 import pytest
-from app import run
+import manage
+
 
 @pytest.fixture
 def test_app():
-    application = run.app
+    application = manage.app
     application.config['TESTING'] = True
     yield application
 
