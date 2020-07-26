@@ -1,0 +1,7 @@
+# 開発環境
+FROM node:lts-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --no-optional
+COPY . .
+CMD ["npm", "run", "dev"]
