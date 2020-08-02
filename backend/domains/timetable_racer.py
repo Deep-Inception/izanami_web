@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from config.database import Base
 from datetime import datetime
 import pandas as pd
-from .model_mixin import ModelMixin
+from backend.models.model_mixin import ModelMixin
 
 
 class TimetableRacer(Base, ModelMixin):

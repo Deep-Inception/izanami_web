@@ -4,7 +4,7 @@ from sqlalchemy.schema import UniqueConstraint
 from config.database import Base
 from datetime import datetime
 import enum, re
-from .model_mixin import ModelMixin
+from backend.models.model_mixin import ModelMixin
 
 class QisqualificationEnum(enum.Enum):
     L0 = "L0" # 選手責任外の出遅れ

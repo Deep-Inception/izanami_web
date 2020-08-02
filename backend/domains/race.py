@@ -4,7 +4,7 @@ from sqlalchemy.schema import UniqueConstraint
 from config.database import Base
 from datetime import datetime
 import enum
-from .model_mixin import ModelMixin
+from backend.models.model_mixin import ModelMixin
 
 @enum.unique
 class RaceStatusEnum(enum.Enum):
