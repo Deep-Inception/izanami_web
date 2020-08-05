@@ -2,17 +2,30 @@ version: "3"
 
 services: 
   flask:
-    container_name: flask-dev
-    image: flask-dev
+    container_name: izanami-dev
+    hostname: izanami-web
+    image: izanami-dev
     ports: 
-      - 3000:5000
-    volumes: 
-      - ./app:/backend_app
-
-  vue:
-    container_name: vue-dev
-    image: vue-dev
-    ports: 
+      - 5000:5000
       - 8080:8080
     volumes: 
-      - ./frontend:/app
+      - ./app:/app
+      - ./frontend:/frontend
+
+  db:
+    container_name: izanami-mysql
+    build: ./db/
+    restart: always
+    hostname: izanami-mysql
+    env_file: 
+      - ./db/.env
+    environment: 
+      MYSQL_USER: izanami
+      MYSQL_DATABASE: db_izanami
+      TZ: "Asia/Tokyo"
+      BIND-ADDRESS: 0.0.0.0
+    ports:
+      - 3306:3306
+    volumes: 
+      - ./db/mysql_data:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf

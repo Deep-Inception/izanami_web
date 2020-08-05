@@ -36,3 +36,22 @@ pytest 5.4.2
 $ cd tests
 
 $ pytest
+
+## docker環境構築手順
+
+### dockerイメージ、コンテナのビルド
+
+docker image build -t izanami-dev -f Dockerfile.dev . #flaskに新しいライブラリを入れた場合はこの実行が必要
+
+docker-compose build #mysql image, izanami_db コンテナのビルド
+
+docker-compose up #再起動だけならこれだけでOK
+
+### db再構築
+
+python -m config.db_migrate
+
+### veu dev 立ち上げ
+
+docker exec -it izanami-dev npm run dev --prefix /frontend
+

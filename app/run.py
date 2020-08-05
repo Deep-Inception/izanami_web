@@ -1,6 +1,7 @@
 from flask import Flask,render_template,request,session,redirect,url_for
 from models.model import OnegaiContent,User
 from config.database import db_session
+from config.config import DevelopmentConfig, ProductionConfig
 from datetime import datetime
 import key
 from hashlib import sha256
@@ -102,8 +103,9 @@ if __name__ == "__main__":
         debug = 0
 
     if debug:
-        logging.config.fileConfig('config/log_conf_debug.ini')
+        logging.config.fileConfig('./config/log_conf_debug.ini')
+        # app.config.from_object('config.config.DevelopmentConfig') #configファイルの読み込み方
     else:
-        logging.config.fileConfig('config/log_conf.ini')
+        logging.config.fileConfig('./config/log_conf.ini')
         app.logger.info('PRODUCTION!')
-    app.run(debug=debug, host='0.0.0.0')
+    app.run(host='0.0.0.0')

@@ -1,0 +1,19 @@
+# veu 環境作成
+FROM node:lts-alpine
+WORKDIR /frontend
+COPY ./frontend /frontend
+RUN npm --prefix /frontend install /frontend --no-optional
+
+FROM python:3.6
+ENV LANG C.UTF-8
+ENV TZ Asia/Tokyo
+COPY ./app /app
+WORKDIR /app
+
+RUN pip install --upgrade pip
+RUN pip install -r /app/requirements.txt
+
+COPY --from=node /usr/local/bin/ /usr/local/bin/
+COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+
+CMD ["python", "/app/run.py"]
