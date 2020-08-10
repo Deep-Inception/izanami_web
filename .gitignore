@@ -5,7 +5,7 @@ __pycache__/
 .vscode/
 .idea/
 *.lzh
-app/tmp/
+backend/tmp/
 *.log
 *.log.*
 .pytest_cache

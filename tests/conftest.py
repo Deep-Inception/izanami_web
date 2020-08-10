@@ -1,13 +1,12 @@
 import sys
-sys.path.append("../")
-sys.path.append("../app/")
-
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '../'))
 import pytest
-from app import run
+import manage
 
 @pytest.fixture
 def test_app():
-    application = run.app
+    application = manage.app
     application.config['TESTING'] = True
     yield application
 

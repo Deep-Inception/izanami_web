@@ -1,5 +1,4 @@
-from app.scraper import result_download, data_download
-import pytest
+from backend.models.scraper import result_download, data_download
 import datetime
 
 def test_get_result_download_url():
