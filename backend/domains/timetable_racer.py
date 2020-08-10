@@ -1,10 +1,9 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Float
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float
 from sqlalchemy.schema import UniqueConstraint
 from sqlalchemy.orm import relationship
-from config.database import Base
+from backend.domains.database import Base
 from datetime import datetime
-import pandas as pd
-from backend.models.model_mixin import ModelMixin
+from backend.domains.model_mixin import ModelMixin
 
 
 class TimetableRacer(Base, ModelMixin):

@@ -4,7 +4,7 @@ import sys, re
 sys.path.append("../")
 sys.path.append("../izanamiutils")
 
-from izanamiutils import math_util
+from backend.utils.izanamiutils import math_util
 
 def get_data(url):
     r = requests.get(url)

@@ -1,20 +1,17 @@
-# vim:fileencoding=utf8
 from flask import Blueprint
-from flask import logging
-from config.database import db_session
-import sys, datetime
+from backend.domains.database import db_session
+import sys
+import datetime
 sys.path.append("../")
 sys.path.append("../models/")
 sys.path.append("../scraper/")
-from models.race import Race, RaceStatusEnum
-from models.timetable_racer import TimetableRacer
-from models.racer_result import RacerResult, QisqualificationEnum
-from models.result import Result
-from scraper import data_download, txt_to_dto_timetable, before_info, race_result
-import datetime
+from backend.domains.race import Race, RaceStatusEnum
+from backend.domains.timetable_racer import TimetableRacer
+from backend.domains.racer_result import RacerResult
+from backend.domains.result import Result
+from backend.models.scraper import data_download, txt_to_dto_timetable, before_info, race_result
 
-batch_app = Blueprint("batch", __name__, template_folder="./templates", static_folder="./static")
-logger = logging.logging
+batch = Blueprint('batch', __name__)
 
 # 当日のレース予定インポート　http://127.0.0.1:5000/batch/race_index/
 # 直前情報インポート　http://127.0.0.1:5000/batch/before_info/
@@ -37,7 +34,7 @@ def find_race_id_by_dto(dto):
         logger.error("place:%s, race_number:%s, deadline:%s のレースが見つかりません" % (dto.place, dto.race_number, dto.deadline.strftime("%Y/%m/%d %H:%M:%S")) )
         return None
 
-@batch_app.route("/race_index/")
+@batch.route("/race_index/")
 def index():
     logger.debug("debug/race_index")
     today = datetime.date.today()
@@ -55,7 +52,7 @@ def index():
     return "ok"
 
 # 20分内に締め切りを迎えるレースの直前情報を取得する
-@batch_app.route("/before_info/")
+@batch.route("/before_info/")
 def before_info_batch():
     now = datetime.datetime.now()
     time = datetime.timedelta(minutes=20)
@@ -77,7 +74,7 @@ def before_info_batch():
             logger.error("直前情報の取得に失敗しました")
     return "ok"
 
-@batch_app.route("/race_result/")
+@batch.route("/race_result/")
 def race_result_batch():
     races = Race.query.filter(Race.status == RaceStatusEnum.IMMEDIATELY_BEFORE).all()
     for race in races:

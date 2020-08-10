@@ -1,9 +1,6 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Float, BOOLEAN, Enum
-from sqlalchemy.schema import UniqueConstraint
-from config.database import Base
+from sqlalchemy import Column, Integer, DateTime, ForeignKey, Float
+from backend.domains.database import Base
 from datetime import datetime
-import enum, re
-
 
 class RacerPredictionDL(Base):
     __tablename__ = "racer_pred_dl"
@@ -13,7 +10,7 @@ class RacerPredictionDL(Base):
     time = Column(Float, unique=False)
     created_at = Column(DateTime, unique=False, default=datetime.now())
 
-    def __init__(self, timetable_racer_id=None, version=None, time=None, disqualification=None):
+    def __init__(self, timetable_racer_id=None, version=None, time=None):
         self.timetable_racer_id = timetable_racer_id
         self.version = version
         self.time = time

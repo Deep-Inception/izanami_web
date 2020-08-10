@@ -1,10 +1,8 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Float, BOOLEAN, Enum
-from sqlalchemy.orm import relationship
-from sqlalchemy.schema import UniqueConstraint
-from config.database import Base
+from sqlalchemy import Column, Integer, DateTime, ForeignKey, Float, Enum
+from backend.domains.database import Base
 from datetime import datetime
 import enum, re
-from backend.models.model_mixin import ModelMixin
+from backend.domains.model_mixin import ModelMixin
 
 class QisqualificationEnum(enum.Enum):
     L0 = "L0" # 選手責任外の出遅れ
@@ -47,7 +45,6 @@ class RacerResult(Base, ModelMixin):
     prize = Column(Integer, unique=False)
     disqualification = Column(Enum(QisqualificationEnum), unique=False, nullable=True)
     created_at = Column(DateTime, unique=False, default=datetime.now())
-    # __table_args__ = (UniqueConstraint("place", "race_number", "deadline", name="unique_race"),)
 
     def __init__(self, timetable_racer_id=None, prize=None, time=None, disqualification=None):
         self.timetable_racer_id = timetable_racer_id

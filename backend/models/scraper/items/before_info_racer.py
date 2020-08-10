@@ -3,7 +3,7 @@ sys.path.append("../")
 sys.path.append("../..")
 sys.path.append("../../izanamiutils")
 
-from izanamiutils import math_util
+from backend.utils.izanamiutils import math_util
 
 # 直前情報のレーサーごとの情報を保持するクラス
 class BeforeInfoRacer:

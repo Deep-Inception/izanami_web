@@ -1,5 +1,5 @@
 import pandas as pd
-from backend import prediction
+from backend.controllers import prediction
 
 def test_raw_data_001():
     data = merged_data_for_test_001()

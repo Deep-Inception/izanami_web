@@ -1,10 +1,8 @@
 import sys
-sys.path.append("../")
-sys.path.append("../backend/")
-
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '../'))
 import pytest
 import manage
-
 
 @pytest.fixture
 def test_app():

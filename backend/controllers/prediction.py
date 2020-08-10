@@ -1,22 +1,16 @@
-# vim:fileencoding=utf8
 from flask import Blueprint
-from flask import logging
 import pandas as pd
-import datetime
 import pickle
-import numpy as np
+from backend.domains.database import db_session
+from backend.domains.timetable_racer import TimetableRacer
+from backend.domains.race import Race, RaceStatusEnum
+from backend.domains.racer_result import RacerResult
+from backend.domains.racer_pred_dl import RacerPredictionDL
+from backend.models.machinelearning import ml_racer_pred_dl, preprocessing_racer_pred_dl
 
-from config.database import db_session
-from models.timetable_racer import TimetableRacer
-from models.race import Race, RaceStatusEnum
-from models.racer_result import RacerResult
-from models.racer_pred_dl import RacerPredictionDL
-from machinelearning import ml_racer_pred_dl, preprocessing_racer_pred_dl
+prediction = Blueprint('preditction', __name__)
 
-predict_app = Blueprint("predict", __name__, template_folder="./templates", static_folder="./static")
-logger = logging.logging
-
-@predict_app.route("/fit/")
+@prediction.route("/fit/")
 def fix():
     raw_data_df = train_data()
     preprocessor = preprocessing_racer_pred_dl.RacerPredDlPreprocessor()
@@ -54,7 +48,7 @@ def raw_data(merged_df):
     raw_data_df.rename(columns={"time": "RACE_TIME", "place": "PLACE","deadline": "RACE_DATE", "distance": "DISTANCE", "couse": "COUSE", "racer_id": "RACER_ID", "exhibition_time": "EXHIBITION_TIME"}, inplace=True)
     return raw_data_df
 
-@predict_app.route("/predict/")
+@prediction.route("/predict/")
 def predict():
     with open('machinelearning/racer_pred_dl_preprocessor.pickle', 'rb') as f:
         preprocessor = pickle.load(f)

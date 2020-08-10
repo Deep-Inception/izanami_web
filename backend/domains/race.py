@@ -1,10 +1,10 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, Enum
+from sqlalchemy import Column, Integer, String, DateTime, Enum
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import UniqueConstraint
-from config.database import Base
+from backend.domains.database import Base
 from datetime import datetime
 import enum
-from backend.models.model_mixin import ModelMixin
+from backend.domains.model_mixin import ModelMixin
 
 @enum.unique
 class RaceStatusEnum(enum.Enum):

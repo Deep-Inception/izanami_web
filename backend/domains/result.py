@@ -1,9 +1,6 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Float, BOOLEAN, Enum
-from sqlalchemy.orm import relationship
-from sqlalchemy.schema import UniqueConstraint
-from config.database import Base
+from sqlalchemy import Column, Integer, DateTime, ForeignKey
+from backend.domains.database import Base
 from datetime import datetime
-import enum, re
 
 class Result(Base):
     __tablename__ = "result"
