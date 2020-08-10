@@ -1,4 +1,5 @@
 from flask import Blueprint
+from flask import logging
 from backend.domains.database import db_session
 import sys
 import datetime
@@ -12,6 +13,7 @@ from backend.domains.result import Result
 from backend.models.scraper import data_download, txt_to_dto_timetable, before_info, race_result
 
 batch = Blueprint('batch', __name__)
+logger = logging.logging
 
 # 当日のレース予定インポート　http://127.0.0.1:5000/batch/race_index/
 # 直前情報インポート　http://127.0.0.1:5000/batch/before_info/

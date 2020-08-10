@@ -4,6 +4,9 @@ import requests
 from flask_sqlalchemy import SQLAlchemy
 import logging.config
 import os
+from backend.controllers.api import api
+from backend.controllers.batch import batch
+from backend.controllers.prediction import prediction
 
 app = Flask('FLASK-VUE',
             static_folder = "./dist/static",
@@ -13,8 +16,9 @@ app.config.from_object('backend.configs.config.BaseConfig')
 
 db = SQLAlchemy(app)
 
-from backend.controllers.api import api
 app.register_blueprint(api, url_prefix="/api")
+app.register_blueprint(batch, url_prefix="/batch")
+app.register_blueprint(prediction, url_prefix="/prediction")
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 @app.route('/', defaults={'path': ''})
