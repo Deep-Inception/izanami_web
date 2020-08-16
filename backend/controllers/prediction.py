@@ -12,6 +12,9 @@ from backend.models.machinelearning import ml_racer_pred_dl, preprocessing_racer
 prediction = Blueprint('preditction', __name__)
 logger = logging.logging
 
+PP_PICKLE_PATH = './backend/tmp/preprocessors/racer_pred_dl_preprocessor.pickle'
+ML_PICKLE_PATH = './backend/tmp/models/ml_racer_pred_dl.pickle'
+
 @prediction.route("/fit/")
 def fix():
     raw_data_df = train_data()
@@ -19,9 +22,9 @@ def fix():
     preprocessor.data_prepare(raw_data_df, 1)
     X, y = preprocessor.get_prepared_data()
     if not pd.isnull(y).any():
-        with open('machinelearning/racer_pred_dl_preprocessor.pickle', 'wb') as f:
+        with open(PP_PICKLE_PATH, 'wb') as f:
             pickle.dump(preprocessor, f)
-        ml_racer_pred_dl.fit(X, y)
+        ml_racer_pred_dl.fit_and_save(X, y, file_path=ML_PICKLE_PATH)
     return "ok"
 
 # モデルの学習に利用するデータを取得する　戻り値：dataframe
@@ -52,7 +55,7 @@ def raw_data(merged_df):
 
 @prediction.route("/predict/")
 def predict():
-    with open('machinelearning/racer_pred_dl_preprocessor.pickle', 'rb') as f:
+    with open(PP_PICKLE_PATH, 'rb') as f:
         preprocessor = pickle.load(f)
     # 予想するレーサーのデータフレームを作成する
     race_ids = [ r[0] for r in db_session.query(Race.id).filter(Race.status == RaceStatusEnum.IMMEDIATELY_BEFORE).all() ]
@@ -73,7 +76,7 @@ def predict():
     raw_data_df.rename(columns={"place": "PLACE","deadline": "RACE_DATE", "distance": "DISTANCE", "couse": "COUSE", "racer_id": "RACER_ID", "exhibition_time": "EXHIBITION_TIME"}, inplace=True)
     preprocessor.data_prepare(raw_data_df, 0)
     X, y = preprocessor.get_prepared_data()
-    y_pred = ml_racer_pred_dl.predict(X)
+    y_pred = ml_racer_pred_dl.predict(X, file_path=ML_PICKLE_PATH)
     for ttr_id , time in zip(list(merged_df["timetable_racer_id"]), y_pred):
         result = RacerPredictionDL(timetable_racer_id=ttr_id, time=time[0], version=ml_racer_pred_dl.VERSION)
         logger.DEBUG("timetable_racer_id: %i, version: %i" % (result.ttr_id, ml_racer_pred_dl.VERSION))
