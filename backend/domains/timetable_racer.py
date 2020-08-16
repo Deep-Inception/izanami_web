@@ -1,38 +1,38 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float
 from sqlalchemy.schema import UniqueConstraint
 from sqlalchemy.orm import relationship
-from backend.domains.database import Base
+from backend import db
 from datetime import datetime
 from backend.domains.model_mixin import ModelMixin
 
 
-class TimetableRacer(Base, ModelMixin):
+class TimetableRacer(db.Model, ModelMixin):
     __tablename__ = "timetable_racer"
-    id = Column(Integer, primary_key=True)
-    race_id = Column(Integer, ForeignKey("race.id"), nullable=False)
-    couse = Column(Integer, unique=False)
-    racer_id = Column(String(32), unique=False)
-    name = Column(String(64), unique=False)
-    age = Column(Integer, unique=False)
-    weight = Column(Integer, unique=False)
-    rank = Column(String(32), unique=False)
-    win_rate = Column(Float, unique=False)
-    exacta_rate = Column(Float, unique=False)
-    win_rate_place = Column(Float, unique=False)
-    exacta_rate_place = Column(Float, unique=False)
-    moter_id = Column(String(32), unique=False)
-    exacta_rate_motor = Column(Float, unique=False)
-    boat_id = Column(String(32), unique=False)
-    exacta_rate_boat = Column(Float, unique=False)
-    result_1 = Column(String(32), unique=False)
-    result_2 = Column(String(32), unique=False)
-    result_3 = Column(String(32), unique=False)
-    result_4 = Column(String(32), unique=False)
-    result_5 = Column(String(32), unique=False)
-    result_6 = Column(String(32), unique=False)
-    exhibition_time = Column(Float, unique=False)
-    tilt = Column(Float, unique=False)
-    created_at = Column(DateTime, unique=False, default=datetime.now())
+    id = db.Column(Integer, primary_key=True)
+    race_id = db.Column(Integer, ForeignKey("race.id"), nullable=False)
+    couse = db.Column(Integer, unique=False)
+    racer_id = db.Column(String(32), unique=False)
+    name = db.Column(String(64), unique=False)
+    age = db.Column(Integer, unique=False)
+    weight = db.Column(Integer, unique=False)
+    rank = db.Column(String(32), unique=False)
+    win_rate = db.Column(Float, unique=False)
+    exacta_rate = db.Column(Float, unique=False)
+    win_rate_place = db.Column(Float, unique=False)
+    exacta_rate_place = db.Column(Float, unique=False)
+    moter_id = db.Column(String(32), unique=False)
+    exacta_rate_motor = db.Column(Float, unique=False)
+    boat_id = db.Column(String(32), unique=False)
+    exacta_rate_boat = db.Column(Float, unique=False)
+    result_1 = db.Column(String(32), unique=False)
+    result_2 = db.Column(String(32), unique=False)
+    result_3 = db.Column(String(32), unique=False)
+    result_4 = db.Column(String(32), unique=False)
+    result_5 = db.Column(String(32), unique=False)
+    result_6 = db.Column(String(32), unique=False)
+    exhibition_time = db.Column(Float, unique=False)
+    tilt = db.Column(Float, unique=False)
+    created_at = db.Column(DateTime, unique=False, default=datetime.now())
     racer_result = relationship("RacerResult", backref="timetable_racer", lazy=True, uselist=False)
     racer_prediction_dl = relationship("RacerPredictionDL", backref="timetable_racer", lazy=True, uselist=False)
     __table_args__ = (UniqueConstraint("race_id", "racer_id", name="unique_racer"),)

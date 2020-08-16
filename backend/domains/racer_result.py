@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, DateTime, ForeignKey, Float, Enum
-from backend.domains.database import Base
+from backend import db
 from datetime import datetime
 import enum, re
 from backend.domains.model_mixin import ModelMixin
@@ -37,14 +37,14 @@ def parse_prize_zen_to_han(str):
         return prize_dict[str]
 
 
-class RacerResult(Base, ModelMixin):
+class RacerResult(db.Model, ModelMixin):
     __tablename__ = "racer_result"
-    id = Column(Integer, primary_key=True)
-    timetable_racer_id = Column(Integer, ForeignKey("timetable_racer.id"), nullable=False, unique=True)
-    time = Column(Float, unique=False)
-    prize = Column(Integer, unique=False)
-    disqualification = Column(Enum(QisqualificationEnum), unique=False, nullable=True)
-    created_at = Column(DateTime, unique=False, default=datetime.now())
+    id = db.Column(Integer, primary_key=True)
+    timetable_racer_id = db.Column(Integer, ForeignKey("timetable_racer.id"), nullable=False, unique=True)
+    time = db.Column(Float, unique=False)
+    prize = db.Column(Integer, unique=False)
+    disqualification = db.Column(Enum(QisqualificationEnum), unique=False, nullable=True)
+    created_at = db.Column(DateTime, unique=False, default=datetime.now())
 
     def __init__(self, timetable_racer_id=None, prize=None, time=None, disqualification=None):
         self.timetable_racer_id = timetable_racer_id
