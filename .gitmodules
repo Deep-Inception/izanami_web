@@ -1,0 +1,3 @@
+[submodule "backend/models/machinelearning"]
+	path = backend/models/machinelearning
+	url = git@github.com:Deep-Inception/izanami_machinelearning_module.git
