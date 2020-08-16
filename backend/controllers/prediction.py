@@ -1,4 +1,5 @@
 from flask import Blueprint
+from flask import logging
 import pandas as pd
 import pickle
 from backend.domains.database import db_session
@@ -9,6 +10,7 @@ from backend.domains.racer_pred_dl import RacerPredictionDL
 from backend.models.machinelearning import ml_racer_pred_dl, preprocessing_racer_pred_dl
 
 prediction = Blueprint('preditction', __name__)
+logger = logging.logging
 
 @prediction.route("/fit/")
 def fix():

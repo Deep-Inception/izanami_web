@@ -5,11 +5,6 @@ from backend import app, db
 # from backend.models import Task
 
 api = Blueprint('api', __name__)
-from backend.controllers.batch import batch
-from backend.controllers.prediction import prediction
-app.register_blueprint(batch, url_prefix="/batch")
-app.register_blueprint(prediction, url_prefix="/prediction")
-
 logger = logging.logging
 
 @api.route('/hello/<string:name>/')
