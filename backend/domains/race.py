@@ -1,9 +1,6 @@
-from sqlalchemy import Column, Integer, String, DateTime, Enum
-from sqlalchemy.orm import relationship
-from sqlalchemy.schema import UniqueConstraint
-from backend import db
 from datetime import datetime
 import enum
+from backend import db
 from backend.domains.model_mixin import ModelMixin
 
 @enum.unique
@@ -14,16 +11,17 @@ class RaceStatusEnum(enum.Enum):
 
 class Race(db.Model, ModelMixin):
     __tablename__ = "race"
-    id = db.Column(Integer, primary_key=True)
-    place = db.Column(String(32), unique=False)
-    race_number = db.Column(String(32), unique=False)
-    deadline = db.Column(DateTime, unique=False)
-    distance = db.Column(Integer, unique=False)
-    title_name = db.Column(String(256), unique=False)
-    created_at = db.Column(DateTime, unique=False, default=datetime.now())
-    __table_args__ = (UniqueConstraint("place", "race_number", "deadline", name="unique_race"),)
-    timetable_racers = relationship("TimetableRacer", backref="race", lazy=True, order_by="TimetableRacer.couse")
-    status = db.Column(Enum(RaceStatusEnum), nullable=False, default=RaceStatusEnum.BEFORE)
+    id = db.Column(db.Integer, primary_key=True)
+    place = db.Column(db.String(32), unique=False)
+    race_number = db.Column(db.String(32), unique=False)
+    deadline = db.Column(db.DateTime, unique=False)
+    distance = db.Column(db.Integer, unique=False)
+    title_name = db.Column(db.String(256), unique=False)
+    status = db.Column(db.Enum(RaceStatusEnum), nullable=False, default=RaceStatusEnum.BEFORE)
+    created_at = db.Column(db.DateTime, unique=False, default=datetime.now())
+    __table_args__ = (db.UniqueConstraint("place", "race_number", "deadline", name="unique_race"),)
+    timetable_racers = db.relationship("TimetableRacer", backref="race", lazy=True, order_by="TimetableRacer.couse")
+    
 
     def __init__(self, url=None, place=None, race_number=None, deadline=None):
         self.url = url
