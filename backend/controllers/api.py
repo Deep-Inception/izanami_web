@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, make_response
 from flask import logging
-from backend import app, db
+from backend import db
 
 # from backend.models import Task
 
