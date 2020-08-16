@@ -4,7 +4,6 @@ import Router from 'vue-router'
 const routerOptions = [
   { path: '/', component: 'top' },
   { path: '/top', component: 'top' }
-//  { path: '/about', component: 'About' }
 ]
 
 const routes = routerOptions.map(route => {
