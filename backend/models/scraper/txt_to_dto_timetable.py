@@ -1,7 +1,7 @@
 import re, os, datetime
 
 def open_file(file_name):
-    f = open("tmp/" + file_name,"r")
+    f = open(file_name,"r")
     return f
 
 def get_data(f):

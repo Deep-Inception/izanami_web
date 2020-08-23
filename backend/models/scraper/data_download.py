@@ -22,7 +22,7 @@ def get_request(date):
     r = requests.get(url)
     return r
 
-def download_lzh(date):
+def download_lzh(date, directory):
     #変数初期化
     year = date.year - 2000
     mon = date.month
@@ -36,7 +36,7 @@ def download_lzh(date):
     # 成功したら、書き込み
     if r is not None:
         if r.status_code == 200:
-            f = open("tmp/%s" % file_name,"wb")
+            f = open(directory + "/" + file_name,"wb")
             f.write(r.content)
             f.close()
             print( file_name+ "を取得しました")
@@ -44,8 +44,8 @@ def download_lzh(date):
             print(file_name + "がダウンロードできませんでした")
     return file_name
 
-def unpacked(filename):
-    lzhfile_path = "tmp/%s" % filename
+def unpacked(filename, directory):
+    lzhfile_path = directory + "/" + filename
     f = lhafile.Lhafile(lzhfile_path)
     print(lzhfile_path)
     unpackedpath = lzhfile_path.replace(".lzh", ".txt")
@@ -59,4 +59,4 @@ def unpacked(filename):
         fileobj.write(f.read(unpacked_name).decode(encoding="shift-jis"))
         fileobj.close()
         os.remove(lzhfile_path)
-    return unpackedname
+    return unpackedpath

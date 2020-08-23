@@ -12,14 +12,16 @@ app = Flask('FLASK-VUE',
 app.config.from_object('backend.configs.config.BaseConfig')
 
 db = SQLAlchemy(app)
+db_session = db.session
 
 from backend.controllers.api import api
 from backend.controllers.batch import batch
 from backend.controllers.prediction import prediction
 app.register_blueprint(api, url_prefix="/api")
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 app.register_blueprint(batch, url_prefix="/batch")
 app.register_blueprint(prediction, url_prefix="/prediction")
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
