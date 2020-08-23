@@ -2,12 +2,12 @@ from flask import Blueprint
 from flask import logging
 import pandas as pd
 import pickle
-from backend.domains.database import db_session
 from backend.domains.timetable_racer import TimetableRacer
 from backend.domains.race import Race, RaceStatusEnum
 from backend.domains.racer_result import RacerResult
 from backend.domains.racer_pred_dl import RacerPredictionDL
 from backend.models.machinelearning import ml_racer_pred_dl, preprocessing_racer_pred_dl
+from backend import db_session
 
 prediction = Blueprint('preditction', __name__)
 logger = logging.logging

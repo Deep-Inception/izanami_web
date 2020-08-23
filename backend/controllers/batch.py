@@ -1,6 +1,5 @@
 from flask import Blueprint
 from flask import logging
-from backend.domains.database import db_session
 import sys
 import datetime
 sys.path.append("../")
@@ -11,6 +10,7 @@ from backend.domains.timetable_racer import TimetableRacer
 from backend.domains.racer_result import RacerResult
 from backend.domains.result import Result
 from backend.models.scraper import data_download, txt_to_dto_timetable, before_info, race_result
+from backend import db_session
 
 batch = Blueprint('batch', __name__)
 logger = logging.logging
@@ -40,8 +40,12 @@ def find_race_id_by_dto(dto):
 def index():
     logger.debug("debug/race_index")
     today = datetime.date.today()
-    lzh_filename = data_download.download_lzh(today)
-    filename = data_download.unpacked(lzh_filename)
+    import_race_data(today)
+    return "ok"
+
+def import_race_data(date):
+    directory = "backend/tmp/racedata"
+    filename = data_download.download_and_unpacked(date, directory)
     file = txt_to_dto_timetable.open_file(filename)
     race_dto_list = txt_to_dto_timetable.get_data(file)
     logger.info("%i レースの情報を取得しました" % len(race_dto_list))
@@ -51,7 +55,6 @@ def index():
         race.set_race_id(find_race_id_by_dto(race))
         racers = [TimetableRacer().set_params_from_dto(racer_dto) for racer_dto in race.racers ]
         for racer in racers: commit(racer)
-    return "ok"
 
 # 20分内に締め切りを迎えるレースの直前情報を取得する
 @batch.route("/before_info/")
