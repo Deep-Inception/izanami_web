@@ -31,7 +31,7 @@ def get_data(f):
             f.readline() # 空行
             # レースごとの繰り返し
         if re.search(r"Ｒ",r) and re.search(r"Ｈ",r):
-                race_number = int(re.findall("(.*)Ｒ", r)[0])
+                race_number = int(re.findall("([0123456789０１２３４５６７８９]*)Ｒ", r)[0])
                 distance = int(re.findall("Ｈ(.*)ｍ", r)[0])
                 time = re.findall("電話投票締切予定(.*：.*)", r)[0]
                 deadline = datetime.datetime.strptime("20" + date_str + cast_time(time), "%Y%m%d%H:%M")
@@ -50,7 +50,6 @@ def get_data(f):
                         break
                     racer = create_timetable_racer(l)
                     race.racers.append(racer)
-                    # print(racer.__dict__)
                     l = f.readline()
     return rase_list
 
