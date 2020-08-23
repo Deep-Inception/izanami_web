@@ -25,11 +25,19 @@ pytest 5.4.2
 
 * debug
 
-    $ python app.py
+    $ python manage.py
 
 * production
 
     $ python app.py production
+
+## テーブル作成
+
+python -m initialdatasetup.db_migrate
+
+## レースデータ一括挿入(インポートしようとした日のレースデータが既に存在する場合エラー)
+
+python -m initialdatasetup.init_race_data
 
 ## Test実行方法
 
