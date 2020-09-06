@@ -88,20 +88,23 @@ def race_result_batch():
             race_rst = race_result.get_data(race.race_result_url())
 
             if race_rst is not None: #まだレース結果が表示されていなければ次にいく
-                race_rst.race_id = race.id
-                result = Result().set_params_from_dto(race_rst)
-                db_session.add(result)
-                db_session.commit()
-                db_session.expunge(result)
-
-                racers = race.timetable_racers
-                for (rr, racer) in zip(race_rst.racer_results, racers):
-                    rr.timetable_racer_id = racer.id
-                    racer_result = RacerResult().set_params_from_dto(rr)
-                    db_session.add(racer_result)
+                if race_rst.stop:
+                    race.status = RaceStatusEnum.STOPPED
+                else:
+                    race_rst.race_id = race.id
+                    result = Result().set_params_from_dto(race_rst)
+                    db_session.add(result)
                     db_session.commit()
-                    db_session.expunge(racer_result)
-                race.status = RaceStatusEnum.FINISHED
+                    db_session.expunge(result)
+
+                    racers = race.timetable_racers
+                    for (rr, racer) in zip(race_rst.racer_results, racers):
+                        rr.timetable_racer_id = racer.id
+                        racer_result = RacerResult().set_params_from_dto(rr)
+                        db_session.add(racer_result)
+                        db_session.commit()
+                        db_session.expunge(racer_result)
+                    race.status = RaceStatusEnum.FINISHED
                 db_session.commit()
                 db_session.expunge(race)
         except:

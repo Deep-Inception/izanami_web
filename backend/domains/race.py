@@ -8,6 +8,7 @@ class RaceStatusEnum(enum.Enum):
     BEFORE = "BEFORE" # レース前
     IMMEDIATELY_BEFORE = "IMMEDIATELY_BEFORE" # 直前情報入手済
     FINISHED = "FINISHED" # レース結果取得済
+    STOPPED = "STOPPED" # レース中止(レース結果データなし)
 
 class Race(db.Model, ModelMixin):
     __tablename__ = "race"

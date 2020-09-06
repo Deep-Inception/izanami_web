@@ -34,19 +34,23 @@ class RaceResult:
         self.show1 =  None # 複勝1位
         self.show2 =  None # 複勝2位
         self.racer_results = []
+        self.stop = False
 
     def scrape(self):
-        tables = self.soup.select("div.contentsFrame1 table")
+        if self.stop_race():
+            self.stop = True
+        else:
+            tables = self.soup.select("div.contentsFrame1 table")
 
-        odds = tables[self.RESULT_TABLE].select("tbody tr")
-        self.set_odds(odds)
+            odds = tables[self.RESULT_TABLE].select("tbody tr")
+            self.set_odds(odds)
 
-        race_times = tables[self.RACE_TIME_TABLE].select("tbody tr")
-        racer_results = [RacerResult(elm) for elm in race_times]
-        self.racer_results = sorted(racer_results, key=lambda x:x.couse) # コース順に並び替える
+            race_times = tables[self.RACE_TIME_TABLE].select("tbody tr")
+            racer_results = [RacerResult(elm) for elm in race_times]
+            self.racer_results = sorted(racer_results, key=lambda x:x.couse) # コース順に並び替える
 
     def has_race_result(self):
-        return len(self.soup.select("div.contentsFrame1 table")) == 7
+        return len(self.soup.select("div.contentsFrame1 table")) == 7 or self.stop_race()
 
     def set_odds(self, odds):
         self.trifecta = math_util.cast_to_int(delete_comma(odds[0].select("td")[2].text))
@@ -56,6 +60,14 @@ class RaceResult:
         self.win = math_util.cast_to_int(delete_comma(odds[13].select("td")[2].text))
         self.show1 = math_util.cast_to_int(delete_comma(odds[15].select("td")[2].text))
         self.show2 = math_util.cast_to_int(delete_comma(odds[16].select("td")[1].text))
+
+    def stop_race(self):
+        ru = self.soup.select("h3.title12_title")
+        if len(ru) == 1:
+            race_result_text = ru[0].text
+            return re.search(r"レース中止",race_result_text)
+        else:
+            return False
 
 class RacerResult:
     PLIZE = 0
