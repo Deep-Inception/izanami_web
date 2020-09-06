@@ -17,18 +17,19 @@ def get_data(f):
         # レース場ごとの繰り返し
         if re.search(r"BBGN",r):
             place = r[0:2]
-            f.readline() # 空行
-            f.readline() # 空行
-            f.readline() # 番組表
-            f.readline() # 空行
-            race_name = f.readline().strip()
-            # print(race_name)
-            f.readline() # 空行
-            f.readline() # 日付とか
-            f.readline() # 空行
-            f.readline() # 注意書き
-            f.readline() # 空行
-            f.readline() # 空行
+            a = f.readline() # 空行
+            if re.search(r"ボートレース",a): # BBGN直後の行に「ボートレース」の記載があったら大会情報を取りに行く
+                f.readline() # 空行
+                f.readline() # 番組表
+                f.readline() # 空行
+                race_name = f.readline().strip()
+                # print(race_name)
+                f.readline() # 空行
+                f.readline() # 日付とか
+                f.readline() # 空行
+                f.readline() # 注意書き
+                f.readline() # 空行
+                f.readline() # 空行
             # レースごとの繰り返し
         if re.search(r"Ｒ",r) and re.search(r"Ｈ",r):
                 race_number = int(re.findall("([0123456789０１２３４５６７８９]*)Ｒ", r)[0])
