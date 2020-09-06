@@ -19,3 +19,4 @@ pickleshare == 0.7.5
 lhafile == 0.2.2
 tensorflow == 1.15.2
 Flask-SQLAlchemy == 2.4.4
+schedule == 0.6.0
