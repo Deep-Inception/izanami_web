@@ -1,0 +1,155 @@
+   @@ -0,0 +1,154 @@
+ * {
+    box-sizing: border-box;
+  }
+
+  .clear {
+    clear: left;
+    clear: right;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Meiryo";
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  ul {
+    margin: 0px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1170px;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+
+  header {
+    background-color: rgba(34, 49, 52, 0.9);
+    height: 65px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+  }
+
+  .header-left {
+    float: left;
+  }
+
+  .header-logo {
+    font-size: 35px;
+    padding: 8px;
+    color: #fff;
+  }
+
+  .header-right {
+    float: right;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: all 0.5s;
+  }
+
+  .header-right:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .header-right a {
+    line-height: 65px;
+    padding: 0 25px;
+    color: white;
+    display: block;
+  }
+
+  .top-wrapper {
+    padding: 80px 0 20px 0;
+    text-align: center;
+  }
+
+  .top-wrapper h1 {
+    opacity: 0.7;
+    font-size: 30px;
+    letter-spacing: 5px;
+  }
+
+  .login-wrapper {
+    height: 500px;
+    padding-bottom: 30px;
+    text-align: center;
+  }
+
+  .heading {
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+  }
+
+  .heading h2 {
+    font-weight: normal;
+  }
+
+  .login {
+    display: inline-block;
+    padding: 30px;
+    border: solid 1px #000000;
+  }
+
+  .login p {
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  input {
+    width: 200px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 20px;
+    font-size: 18px;
+    border: 1px solid #dee7ec;
+  }
+
+  .btn {
+    width: 200px;
+    background-color: #dee7ec;
+    margin-bottom: 30px;
+    opacity: 0.8;
+    cursor: pointer;
+    box-shadow: 0 5px #AAAAAA;
+    outline:0;
+  }
+
+  .btn:hover {
+    opacity: 1;
+  }
+
+  .btn:active {
+    position: relative;
+    top: 7px;
+    box-shadow: none;
+  }
+
+  footer {
+    background-color: rgba(34, 49, 52, 0.9);
+    color: #fff;
+    margin-top: 20px;
+  }
+
+  .footer-logo {
+    float: left;
+    font-size: 36px;
+    padding: 20px;
+  }
+
+  .footer-list {
+    float: right;
+    font-size: 18px;
+    padding: 20px;
+    display: table-cell;
+  }
