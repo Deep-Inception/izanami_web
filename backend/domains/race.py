@@ -52,3 +52,6 @@ class Race(db.Model, ModelMixin):
         jcd = self.place
         date_str = self.deadline.strftime("%Y%m%d")
         return "http://www.boatrace.jp/owpc/pc/race/raceresult?rno=%s&jcd=%s&hd=%s" % (rno, jcd, date_str)
+
+    def race_index_hash(self):
+        return {"race_number": self.race_number, "deadline": self.deadline.strftime("%H:%M"), "place": self.place}

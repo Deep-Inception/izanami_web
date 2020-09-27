@@ -17,8 +17,12 @@ db_session = db.session
 from backend.controllers.login import login_blueprint
 from backend.controllers.batch import batch
 from backend.controllers.prediction import prediction
+from backend.controllers.race import race_bp
+
 app.register_blueprint(login_blueprint, url_prefix="/login")
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
+app.register_blueprint(race_bp, url_prefix="/races")
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 app.register_blueprint(batch, url_prefix="/batch")
 app.register_blueprint(prediction, url_prefix="/prediction")
 
