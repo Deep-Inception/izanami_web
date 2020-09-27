@@ -14,12 +14,12 @@ app.config.from_object('backend.configs.config.BaseConfig')
 db = SQLAlchemy(app)
 db_session = db.session
 
-from backend.controllers.api import api
+from backend.controllers.login import login_blueprint
 from backend.controllers.batch import batch
 from backend.controllers.prediction import prediction
 from backend.controllers.race import race_bp
 
-app.register_blueprint(api, url_prefix="/api")
+app.register_blueprint(login_blueprint, url_prefix="/login")
 app.register_blueprint(race_bp, url_prefix="/races")
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
