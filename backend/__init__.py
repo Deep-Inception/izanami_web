@@ -21,7 +21,7 @@ from backend.controllers.race import race_bp
 
 app.register_blueprint(login_blueprint, url_prefix="/login")
 app.register_blueprint(race_bp, url_prefix="/races")
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.register_blueprint(batch, url_prefix="/batch")
 app.register_blueprint(prediction, url_prefix="/prediction")
