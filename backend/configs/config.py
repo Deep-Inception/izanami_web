@@ -1,7 +1,7 @@
 import os
 class BaseConfig(object):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///backend.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///initialdatasetup/backend.db'
     # cookieを暗号化する秘密鍵
     SECRET_KEY = os.urandom(24)
     # csrf token用秘密鍵

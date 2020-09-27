@@ -2,8 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 const routerOptions = [
-  { path: '/', component: 'top' },
-  { path: '/top', component: 'top' }
+  { path: '/', component: 'login' },
+  { path: '/login', name: 'login', query: { next: '' }, component: 'login' },
+  { path: '/pageA', name: 'pageA', query: { auth: '' }, component: 'pageA' },
+  { path: '*', component: 'NotFound' }
 ]
 
 const routes = routerOptions.map(route => {
