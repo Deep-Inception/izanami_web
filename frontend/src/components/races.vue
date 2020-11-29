@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul v-for='place_data in data' :key="place_data.place">
+    <ul v-for='place_data in races' :key="place_data.place">
       レース会場 {{ place_data.place }}
       <div class='flex'>
           <raceListItem v-for="race in place_data.races" :key="race.race_number" v-bind:race="race">
@@ -11,13 +11,24 @@
 </template>
 
 <script>
+import Axios from 'axios'
 import raceListItem from './raceListItem.vue'
-const data = [{place: '01', races: [{race_number: '01R', deadline: '12:34', place: '01'}, {race_number: '02R', deadline: '23:45', place: '01'}]}, {place: '02', races: [{ race_number: '01R', deadline: '22:34', place: '02' }, {race_number: '02R', deadline: '22:45', place: '02'}]}]
-
 export default {
   components: { raceListItem },
   data: function () {
-    return { data: data }
+    return {races: []}
+  },
+  mounted () {
+    const axios = Axios.create({
+      // axiosインスタンスの作成
+      baseURL: 'http://127.0.0.1:5000/',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      responseType: 'json'
+    })
+    axios.get('/races', {params: { date: this.$route.query.date }}).then(response => { this.races = response.data })
   }
 }
 </script>
