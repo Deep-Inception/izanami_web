@@ -8,7 +8,7 @@ import os
 app = Flask('FLASK-VUE',
             static_folder = "./dist/static",
             template_folder = "./dist")
-
+app.url_map.strict_slashes = False
 app.config.from_object('backend.configs.config.BaseConfig')
 
 db = SQLAlchemy(app)
