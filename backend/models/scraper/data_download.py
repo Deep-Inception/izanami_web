@@ -74,6 +74,6 @@ def download_and_unpacked(date, directory):
         print ("すでに", filepath, "は存在します。")
         return filepath
 
-    lzh_file = data_download.download_lzh(date, directory)
-    filename = data_download.unpacked(lzh_file, directory)
+    lzh_file = download_lzh(date, directory)
+    filename = unpacked(lzh_file, directory)
     return filename
