@@ -72,3 +72,10 @@ class TimetableRacer(db.Model, ModelMixin):
         self.exhibition_time = dto.exhibition
         self.tilt = dto.tilt
         return self
+
+    def detail(self):
+        detail = {}
+        detail['name'] = self.name
+        detail['age'] = self.age
+        detail['couse'] = self.couse
+        return detail
