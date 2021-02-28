@@ -11,23 +11,15 @@
 </template>
 
 <script>
-import Axios from 'axios'
 import raceListItem from './raceListItem.vue'
+import backendApi from '../mixins/backendApi.js'
 export default {
   components: { raceListItem },
   data: function () {
     return {races: []}
   },
   mounted () {
-    const axios = Axios.create({
-      // axiosインスタンスの作成
-      baseURL: 'http://127.0.0.1:5000/',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest'
-      },
-      responseType: 'json'
-    })
+    const axios = backendApi()
     axios.get('/races', {params: { date: this.$route.query.date }}).then(response => { this.races = response.data })
   }
 }

@@ -6,8 +6,8 @@ const routerOptions = [
   { path: '/login', name: 'login', query: { next: '' }, component: 'login' },
   { path: '/pageA', name: 'pageA', query: { auth: '' }, component: 'pageA' },
   { path: '*', component: 'NotFound' },
-  { path: '/races', component: 'races' }
-
+  { path: '/races', component: 'races' },
+  { path: '/raceDetail', component: 'raceDetail' }
 ]
 
 const routes = routerOptions.map(route => {
