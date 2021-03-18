@@ -4,10 +4,10 @@ import pandas as pd
 import pickle
 from backend.domains.timetable_racer import TimetableRacer
 from backend.domains.race import Race, RaceStatusEnum
-from backend.domains.racer_result import RacerResult
-from backend.domains.racer_pred_dl import RacerPredictionDL
-from backend.models.machinelearning import ml_racer_pred_dl, preprocessing_racer_pred_dl
-from backend.controllers import prediction_racer_pred_dl, prediction_racer_prize_lgb
+# from backend.domains.racer_result import RacerResult
+# from backend.domains.racer_pred_dl import RacerPredictionDL
+# from backend.models.machinelearning import ml_racer_time_dl, preprocessing_racer_time_dl
+from backend.controllers import prediction_racer_time_dl, prediction_racer_prize_lgb
 from backend import db_session
 
 prediction = Blueprint('prediction', __name__)
@@ -15,7 +15,7 @@ logger = logging.logging
 
 @prediction.route("/fit/")
 def fix():
-    prediction_racer_pred_dl.fix()
+    prediction_racer_time_dl.fix()
     prediction_racer_prize_lgb.fix()
     return "ok"
 
@@ -29,7 +29,7 @@ def predict():
     try:
         race_ids = set(prediction_df.race_id)
         races = Race.query.filter(Race.id.in_(race_ids)).all()
-        prediction_racer_pred_dl.predict(prediction_df)
+        prediction_racer_time_dl.predict(prediction_df)
         prediction_racer_prize_lgb.predict(prediction_df)
         logger.debug("%i 件の予想完了" % len(races))
         for race in races:

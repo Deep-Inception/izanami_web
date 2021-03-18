@@ -5,7 +5,7 @@ import datetime
 from flask import logging
 from backend import db_session
 from backend.domains.racer_prediction import RacerPrediction
-from backend.models.machinelearning import ml_racer_pred_dl, preprocessing_racer_pred_dl
+from backend.models.machinelearning import ml_racer_time_dl, preprocessing_racer_time_dl
 from backend.domains.timetable_racer import TimetableRacer
 from backend.domains.race import Race, RaceStatusEnum
 from backend.domains.racer_result import RacerResult
@@ -17,13 +17,13 @@ ML_PICKLE_PATH = './backend/tmp/models/ml_racer_time_dl.pickle'
 
 def fix():
     raw_data_df = train_data()
-    preprocessor = preprocessing_racer_pred_dl.RacerPredDlPreprocessor()
+    preprocessor = preprocessing_racer_time_dl.RacerPredDlPreprocessor()
     preprocessor.data_prepare(raw_data_df, 1)
     X, y = preprocessor.get_prepared_data()
     
     if not pd.isnull(y).any():
         file_util.pickle_dump(preprocessor, PP_PICKLE_PATH)
-        ml_racer_pred_dl.fit_and_save(X, y, file_path=ML_PICKLE_PATH)
+        ml_racer_time_dl.fit_and_save(X, y, file_path=ML_PICKLE_PATH)
 
 # モデルの学習に利用するデータを取得する 戻り値：dataframe
 def train_data():
@@ -61,12 +61,9 @@ def predict(df_data):
     raw_data_df.rename(columns={"place": "PLACE","deadline": "RACE_DATE", "distance": "DISTANCE", "couse": "COUSE", "racer_id": "RACER_ID", "exhibition_time": "EXHIBITION_TIME"}, inplace=True)
     preprocessor.data_prepare(raw_data_df, 0)
     X, y = preprocessor.get_prepared_data()
-    y_pred = ml_racer_pred_dl.predict(X, file_path=ML_PICKLE_PATH)
+    y_pred = ml_racer_time_dl.predict(X, file_path=ML_PICKLE_PATH)
     for ttr_id , time in zip(list(df_data["timetable_racer_id"]), y_pred):
-        result = RacerPrediction().set_params(timetable_racer_id=ttr_id, value=time[0],  model=ml_racer_pred_dl.MODEL_NAME, version=ml_racer_pred_dl.VERSION)
+        result = RacerPrediction().set_params(timetable_racer_id=ttr_id, value=time[0],  model=ml_racer_time_dl.MODEL_NAME, version=ml_racer_time_dl.VERSION)
         db_session.add(result)
         db_session.commit()
         db_session.expunge(result)
-
-
-

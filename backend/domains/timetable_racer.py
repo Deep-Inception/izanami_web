@@ -31,7 +31,7 @@ class TimetableRacer(db.Model, ModelMixin):
     tilt = db.Column(db.Float, unique=False)
     created_at = db.Column(db.DateTime, unique=False, default=datetime.now())
     racer_result = db.relationship("RacerResult", backref="timetable_racer", lazy=True, uselist=False)
-    racer_prediction_dl = db.relationship("RacerPredictionDL", backref="timetable_racer", lazy=True, uselist=False)
+    racer_prediction = db.relationship("RacerPrediction", backref="timetable_racer", lazy=True, uselist=False)
     __table_args__ = (db.UniqueConstraint("race_id", "racer_id", name="unique_racer"),)
 
 
