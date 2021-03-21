@@ -65,14 +65,13 @@ def before_info_batch():
     races = Race.query.filter(deadline_datetime >= Race.deadline, Race.status == RaceStatusEnum.BEFORE).all()
     for race in races:
         try:
-            logger.debug(race.before_info_url())
+            logger.info(race.before_info_url())
             before_info_data = before_info.get_data(race.before_info_url())
             racers = race.timetable_racers
             # racerもbefore_info_racerも枠順に取得しているため一緒にイテレートできる
             for (racer, before_info_racer) in zip(racers, before_info_data.racers):
                 if not racer.has_before_info():
                     racer.set_before_info(before_info_racer)
-                    db_session.commit()
             race.status = RaceStatusEnum.IMMEDIATELY_BEFORE
             db_session.commit()
         except:
@@ -86,7 +85,6 @@ def race_result_batch():
         try:
             logger.info(race.race_result_url())
             race_rst = race_result.get_data(race.race_result_url())
-
             if race_rst is not None: #まだレース結果が表示されていなければ次にいく
                 if race_rst.stop:
                     race.status = RaceStatusEnum.STOPPED
@@ -94,19 +92,22 @@ def race_result_batch():
                     race_rst.race_id = race.id
                     result = Result().set_params_from_dto(race_rst)
                     db_session.add(result)
-                    db_session.commit()
-                    db_session.expunge(result)
 
                     racers = race.timetable_racers
                     for (rr, racer) in zip(race_rst.racer_results, racers):
                         rr.timetable_racer_id = racer.id
                         racer_result = RacerResult().set_params_from_dto(rr)
                         db_session.add(racer_result)
-                        db_session.commit()
-                        db_session.expunge(racer_result)
+                    
                     race.status = RaceStatusEnum.FINISHED
+                # 結果を取得したレースはレース結果を予想する必要がないので、予想済フラグを立てる
+                race.has_prediction = True
                 db_session.commit()
+                db_session.expunge(result)
+                db_session.expunge(racer_result)
                 db_session.expunge(race)
-        except:
-            logger.error("レース結果の取得に失敗しました")
+        except Exception as e:
+            logger.error(f"レース結果の取得に失敗しました {race.id}")
+            logger.error(f"type: {str(type(e))}")
+            logger.error(f"args: {str(e.args)}")
     return "ok"
