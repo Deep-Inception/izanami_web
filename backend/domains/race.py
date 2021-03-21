@@ -18,6 +18,7 @@ class Race(db.Model, ModelMixin):
     deadline = db.Column(db.DateTime, unique=False)
     distance = db.Column(db.Integer, unique=False)
     title_name = db.Column(db.String(256), unique=False)
+    has_prediction = db.Column(db.Boolean, default=False)
     status = db.Column(db.Enum(RaceStatusEnum), nullable=False, default=RaceStatusEnum.BEFORE)
     created_at = db.Column(db.DateTime, unique=False, default=datetime.now())
     __table_args__ = (db.UniqueConstraint("place", "race_number", "deadline", name="unique_race"),)
