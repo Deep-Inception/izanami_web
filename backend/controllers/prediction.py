@@ -4,9 +4,6 @@ import pandas as pd
 import pickle
 from backend.domains.timetable_racer import TimetableRacer
 from backend.domains.race import Race, RaceStatusEnum
-# from backend.domains.racer_result import RacerResult
-# from backend.domains.racer_pred_dl import RacerPredictionDL
-# from backend.models.machinelearning import ml_racer_time_dl, preprocessing_racer_time_dl
 from backend.controllers import prediction_racer_time_dl, prediction_racer_prize_lgb
 from backend import db_session
 
