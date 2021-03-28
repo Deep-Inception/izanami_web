@@ -26,11 +26,22 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 app.register_blueprint(batch, url_prefix="/batch")
 app.register_blueprint(prediction, url_prefix="/prediction")
 
+def get_app(debug=True):
+    config_path = 'backend.configs.config.BaseConfig'
+    log_config_path = 'configs/log_conf_debug.ini'
+    if not debug:
+        config_path = 'backend.configs.config.ProductionConfig'
+    
+    app.config.from_object(config_path)
+    logging.config.fileConfig(os.path.join(os.path.dirname(__file__), log_config_path))
+    return app
+        
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
     if app.debug:
-        logging.config.fileConfig(os.path.join(os.path.dirname(__file__), 'configs/log_conf_debug.ini'))
         return requests.get('http://localhost:8080/{}'.format(path)).text
-    logging.config.fileConfig('configs/log_conf.ini')
+    else:
+        app.config.from_object('backend.configs.config.ProductionConfig')
     return render_template("index.html")
