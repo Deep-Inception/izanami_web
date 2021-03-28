@@ -44,3 +44,9 @@ python -m initialdatasetup.init_race_data
 $ cd tests
 
 $ pytest
+
+## dockerイメージ、コンテナのビルド(開発用)
+
+docker-compose build #image, izanami_db コンテナのビルド
+
+docker-compose up #再起動だけならこれだけでOK
