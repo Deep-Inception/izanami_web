@@ -1,7 +1,7 @@
 <template>
-      <div class='w-20 text-center p-0 m-4 bg-gray-200 text-sm max-w-sm'>
-        <p class='border-b border-gray-800 p-1'>{{ race.race_number }}</p>
-        <p class='p-1'>{{ race.deadline }}</p>
+      <div class='w-20 text-center p-0 m-4 text-sm max-w-sm'>
+        <p class='p-1 bg-blue-700 rounded-t-sm text-white'>{{ race.race_number }}R</p>
+        <p class='p-1 bg-blue-500 rounded-b-sm text-white'>{{ race.deadline }}</p>
       </div>
 </template>
 
@@ -11,7 +11,3 @@ export default {
   props: ['race']
 }
 </script>
-
-<style>
-
-</style>

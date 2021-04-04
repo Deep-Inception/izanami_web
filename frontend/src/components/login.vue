@@ -6,16 +6,7 @@
       <title>Top</title>
     </head>
     <body>
-      <header>
-        <div class="container">
-          <div class="header-left">
-            <div class="header-logo">Izanami</div>
-          </div>
-          <div class="header-right">
-            <a href="#" class="header-login">ログイン</a>
-          </div>
-        </div>
-      </header>
+      <Header></Header>
       <div class="top-wrapper">
         <div class="container">
           <h1>競艇結果AI予測</h1>
@@ -35,28 +26,23 @@
           </div>
         </div>
       </div>
-      <footer>
-        <div class="container">
-          <div class="footer-logo">Deep Inception</div>
-          <div class="footer-list">
-            <ul>
-              <li>お問い合わせ</li>
-              <li>会社情報</li>
-            </ul>
-          </div>
-          <div class="clear"></div>
-        </div>
-      </footer>
+      <Footer></Footer>
     </body>
   </html>
 </template>
 
 <script>
+import Header from './header.vue'
+import Footer from './footer.vue'
 import Axios from 'axios'
 import { KJUR } from 'jsrsasign'
 import router from '../router/index.js'
 export default {
   name: 'login',
+  components: {
+    Header,
+    Footer
+  },
   data: function () {
     return {
       email: '',
@@ -98,7 +84,7 @@ export default {
           // 次のページにジャンプ
           router.push({name: nextPage})
         } else {
-          document.getElementById('loginResult').innerHTML = 'Login Failed !'
+          document.getElementById('loginResult').innerHTML = 'Login Failed !!'
         }
       })
     },

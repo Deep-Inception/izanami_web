@@ -2,14 +2,16 @@ from flask import Flask
 from flask_cors import CORS
 import requests
 from flask_sqlalchemy import SQLAlchemy
+from flask import render_template
 import logging.config
 import os
 
 app = Flask('FLASK-VUE',
-            static_folder = "./dist/static",
-            template_folder = "./dist")
+            static_folder="./dist/static",
+            template_folder="./dist")
 app.url_map.strict_slashes = False
 app.config.from_object('backend.configs.config.BaseConfig')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 db_session = db.session
