@@ -12,3 +12,4 @@ backend/tmp/
 *.pickle
 /dist/
 /db/mysql_data/
+/db/dump.sql
