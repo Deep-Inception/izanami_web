@@ -2,25 +2,6 @@
 
 This is Boat Racing tip App!!!
 
-* Libraries
-Python 3.6.7
-
-Flask 1
-
-scikit-learn 0.22.1
-
-numpy 1.18.1
-
-beautifulsoup4 4.8.2
-
-python-chromedriver-binary 81.0.4044.20.0
-
-selenium 3.141.0
-
-lhafile 0.2.2
-
-pytest 5.4.2
-
 ## 起動方法
 
 * debug
@@ -50,3 +31,27 @@ $ pytest
 docker-compose build #image, izanami_db コンテナのビルド
 
 docker-compose up #再起動だけならこれだけでOK
+
+## mysql
+
+### izanamiユーザを作る
+
+docker exec -i -t izanami-mysql bash
+
+mysql -u root -p 
+
+password
+
+use mysql
+
+CREATE USER izanami@'localhost' IDENTIFIED BY 'izanami';
+
+grant all on db_izanami.* to izanami@localhost;
+
+### データベースを作る
+
+docker exec -i -t izanami-backend bash
+
+python -m initialdatasetup.db_migrate (テーブル作成)
+
+mysql -u izanami -pizanami db_izanami < dump.sql

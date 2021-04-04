@@ -11,3 +11,5 @@ backend/tmp/
 .pytest_cache
 *.pickle
 /dist/
+/db/mysql_data/
+/db/dump.sql

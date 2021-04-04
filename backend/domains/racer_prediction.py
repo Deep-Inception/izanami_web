@@ -5,7 +5,7 @@ class RacerPrediction(db.Model):
     __tablename__ = "racer_prediction"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     timetable_racer_id = db.Column(db.Integer, db.ForeignKey("timetable_racer.id"), nullable=False)
-    model = db.Column(db.String, unique=False, nullable=False)
+    model = db.Column(db.String(32), unique=False, nullable=False)
     version = db.Column(db.Integer, unique=False, nullable=False)
     value = db.Column(db.Float, unique=False)
     created_at = db.Column(db.DateTime, unique=False, default=datetime.now())
