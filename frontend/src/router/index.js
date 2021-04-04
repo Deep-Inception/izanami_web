@@ -5,9 +5,10 @@ const routerOptions = [
   { path: '/', component: 'login' },
   { path: '/login', name: 'login', query: { next: '' }, component: 'login' },
   { path: '/pageA', name: 'pageA', query: { auth: '' }, component: 'pageA' },
-  { path: '*', component: 'NotFound' },
-  { path: '/races', component: 'races' },
-  { path: '/raceDetail', component: 'raceDetail' }
+  { path: '/pageB', name: 'pageB', query: { auth: '' }, component: 'pageB' },
+  { path: '/races', name: 'races', query: { auth: '' }, component: 'races' },
+  { path: '/raceDetail', component: 'raceDetail' },
+  { path: '*', component: 'NotFound' }
 ]
 
 const routes = routerOptions.map(route => {

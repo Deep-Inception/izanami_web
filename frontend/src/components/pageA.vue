@@ -4,6 +4,7 @@
     <div>
       Valid until {{ until.toString() }}
     </div>
+    <a href= "http://127.0.0.1:5000/races" class="text-blue-500 underline">Races</a>
   </div>
 </template>
 

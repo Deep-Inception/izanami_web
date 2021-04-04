@@ -34,7 +34,7 @@
 
   header {
     background-color: rgba(34, 49, 52, 0.9);
-    height: 65px;
+    height: 50px;
     width: 100%;
     position: fixed;
     top: 0;
@@ -47,7 +47,7 @@
 
   .header-logo {
     font-size: 35px;
-    padding: 8px;
+    padding: 0px 8px;
     color: #fff;
   }
 
@@ -62,7 +62,7 @@
   }
 
   .header-right a {
-    line-height: 65px;
+    line-height: 50px;
     padding: 0 25px;
     color: white;
     display: block;
@@ -103,7 +103,7 @@
   .login p {
     font-size: 20px;
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
   }
 
   input {
