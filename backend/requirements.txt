@@ -17,7 +17,7 @@ mysql-connector-python-rf == 2.2.2
 pandas == 1.0.5
 pickleshare == 0.7.5
 lhafile == 0.2.2
-tensorflow == 1.15.2
+# tensorflow == 1.15.2
 Flask-SQLAlchemy == 2.4.4
 schedule == 0.6.0
 flask_cors == 3.0.8
