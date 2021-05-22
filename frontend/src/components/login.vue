@@ -34,7 +34,7 @@
 <script>
 import Header from './header.vue'
 import Footer from './footer.vue'
-import Axios from 'axios'
+import backendApi from '../mixins/backendApi.js'
 import { KJUR } from 'jsrsasign'
 import router from '../router/index.js'
 export default {
@@ -52,21 +52,13 @@ export default {
   methods: {
     checklogin: function (event) {
       // checkloginイベント(htmlファイル内で定義している)の内容を記述
-      var axios = Axios.create({
-        // axiosインスタンスの作成
-        baseURL: 'http://127.0.0.1:5000/',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest'
-        },
-        responseType: 'json'
-      })
+      const axios = backendApi()
       var nextPage = 'pageA'
 
       // axiosのthenメソッドの中ではthisがvueコンポーネントを指さなくなるので別の変数に割り当てておく
       var self = this
       // バックエンドのAPIサーバにリクエストを送信
-      axios.get('/login', {
+      axios.get('api/login', {
         // クエリパラメータをセット
         params: {
           email: document.getElementById('email').value,

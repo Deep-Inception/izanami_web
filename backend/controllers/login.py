@@ -11,7 +11,6 @@ logger = logging.logging
 def login():
     email = request.args.get('email', '')
     password = request.args.get('password', '')
-
     users = db_session.query(User).filter(User.email == email).all()
 
     for user in users:

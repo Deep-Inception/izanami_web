@@ -41,7 +41,7 @@ export default {
   },
   mounted () {
     const axios = backendApi()
-    axios.get('/races', {params: { date: this.$route.query.date }}).then(response => { this.races = response.data })
+    axios.get('api/races', {params: { date: this.$route.query.date }}).then(response => { this.races = response.data })
   },
   methods: {
     getPlace: function (id) {
