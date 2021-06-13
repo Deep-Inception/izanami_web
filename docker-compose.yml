@@ -36,8 +36,6 @@ services:
       MYSQL_DATABASE: db_izanami
       TZ: "Asia/Tokyo"
       BIND-ADDRESS: 0.0.0.0
-    ports:
-      - 3306:3306
     command: mysqld
     cap_add:
       - SYS_NICE

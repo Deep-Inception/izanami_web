@@ -20,7 +20,7 @@ export default {
     let date = this.$route.query.date
     let place = this.$route.query.place
     let race = this.$route.query.race
-    axios.get(`/races/${date}/${place}/${race}`).then(response => { this.data = response.data })
+    axios.get(`api/races/${date}/${place}/${race}`).then(response => { this.data = response.data })
   }
 }
 </script>

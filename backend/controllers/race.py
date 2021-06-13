@@ -40,9 +40,7 @@ def race(date, place, race_number):
     if race == None:
         return jsonify({})
     racers = race.timetable_racers
-    # print(racers[0].name)
     return jsonify(racer_dict(racers))
-    # return racers[0].name
 
 def racer_dict(racers):
     result = []
