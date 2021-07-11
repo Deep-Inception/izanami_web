@@ -2,8 +2,8 @@ import os
 class BaseConfig(object):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{user}:{password}@{host}/{db_name}?charset=utf8&auth_plugin_map={auth_plugin_map}'.format(**{
-      'user': 'root',
-      'password': 'izaname_web',
+      'user': 'izanami',
+      'password': 'izanami',
       'host': 'izanami-mysql',
       'db_name': 'db_izanami',
       'auth_plugin_map' : {'mysql_native_password'}
