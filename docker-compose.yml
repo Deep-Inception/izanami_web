@@ -23,7 +23,7 @@ services:
     volumes:
       - ./frontend:/frontend
 
-  db:
+  izanami-mysql:
     container_name: izanami-mysql
     build: ./db/
     restart: always

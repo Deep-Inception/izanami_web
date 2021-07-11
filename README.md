@@ -40,13 +40,17 @@ docker exec -i -t izanami-mysql bash
 
 mysql -u root -p 
 
-password
+izanami
 
 use mysql
 
 CREATE USER izanami@'localhost' IDENTIFIED BY 'izanami';
 
 grant all on db_izanami.* to izanami@localhost;
+
+CREATE USER izanami@'%' IDENTIFIED BY 'izanami';
+
+grant all on db_izanami.* to izanami@'%';
 
 ### データベースを作る
 
