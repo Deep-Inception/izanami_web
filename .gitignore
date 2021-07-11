@@ -13,3 +13,4 @@ backend/tmp/
 /dist/
 /db/mysql_data/
 /db/dump.sql
+*.pid
