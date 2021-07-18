@@ -1,23 +1,29 @@
 <template>
   <div>
     <Header></Header>
-    <div class="top-wrapper">
-      <div class="container">
-        <h1>当日レース一覧</h1>
-      </div>
-    </div>
-    <div class="data-wrapper pb-8">
-      <div class="container px-8">
+    <section class="text-gray-600 body-font">
+      <div class="container px-0 py-24 mx-auto">
+        <div class="flex flex-col text-center w-full mb-4">
+          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">当日レース一覧</h1>
+          <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Races with results are shown in gray, the next race is shown in red, and the race after that is shown in blue. If you want to see the details, click on the race.</p>
+        </div>
         <ul v-for='place_data in races' :key="place_data.place">
-
-          {{getPlace(place_data.place)}}
-          <div class='flex'>
-              <raceListItem v-for="race in place_data.races" :key="race.race_number" v-bind:race="race">
-              </raceListItem>
+          <h1 class="text-2xl font-medium title-font text-gray-900 mt-3 mb-1 text-center">{{getPlace(place_data.place)}}</h1>
+          <div class="flex flex-wrap">
+            <div v-for="race in place_data.races" :key="race.race_number" v-bind:race="race">
+              <div class="flex p-2 lg:w-1/12 md:w-1/6 w-full">
+                <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg" :class="backgroundColor(race.deadline, getPlace(place_data.place))">
+                  <div class="flex-grow">
+                    <h2 class="text-gray-900 title-font font-medium text-center underline">{{race.race_number}}R</h2>
+                    <p class="text-gray-900 text-center">{{race.deadline}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </ul>
       </div>
-    </div>
+    </section>
     <Footer></Footer>
   </div>
 </template>
@@ -27,6 +33,10 @@ import Header from './header.vue'
 import Footer from './footer.vue'
 import raceListItem from './raceListItem.vue'
 import backendApi from '../mixins/backendApi.js'
+var now = new Date()
+let flag
+flag = 0
+let place
 export default {
   components: { Header, Footer, raceListItem },
   data: function () {
@@ -46,7 +56,42 @@ export default {
   methods: {
     getPlace: function (id) {
       return this.map.get(id)
+    },
+    twoDigit: function (num) {
+      let ret
+      if (num < 10) {
+        ret = '0' + num
+      } else {
+        ret = num
+      }
+      return ret
+    },
+    backgroundColor: function (deadline, racePlace) {
+      if (place !== racePlace) {
+        flag = 0
+        place = racePlace
+      }
+      if (deadline < this.twoDigit(now.getHours()) + ':' + this.twoDigit(now.getMinutes())) {
+        flag = 0
+        return 'gray'
+      } else if (flag === 0) {
+        flag = 1
+        return 'red'
+      }
+      return 'blue'
     }
   }
 }
 </script>
+
+<style>
+.gray {
+  background-color: rgba(229, 231, 235)
+}
+.red {
+  background-color: rgba(254, 202, 202)
+}
+.blue {
+  background-color: rgba(219, 234, 254)
+}
+</style>
