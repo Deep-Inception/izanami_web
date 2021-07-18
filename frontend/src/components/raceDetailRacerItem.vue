@@ -1,8 +1,13 @@
 <template>
-  <tr class='w-20 text-center p-0 m-4 bg-gray-200 text-sm max-w-sm'>
-    <td class='border-b border-gray-800 p-1'>{{ racer.couse }}</td>
-    <td class='border-b border-gray-800 p-1'>{{ racer.racer.name }}</td>
-    <td class='p-1'>{{ racer.racer.age }}</td>
+  <tr>
+    <td class="border-t-2 border-gray-200 px-4 py-3">{{ racer.couse }}</td>
+    <td class="border-t-2 border-gray-200 px-4 py-3">{{ racer.racer.racer_id }}</td>
+    <td class="border-t-2 border-gray-200 px-4 py-3">{{ racer.racer.name }} ( {{ racer.racer.age }}歳 / {{ racer.racer.weight }}kg )</td>
+    <td class="border-t-2 border-gray-200 px-4 py-3">{{ racer.racer.rank }}</td>
+    <td class="border-t-2 border-gray-200 px-4 py-3">{{ racer.racer.win_rate }} ({{ racer.racer.win_rate_place }})</td>
+    <td class="border-t-2 border-gray-200 px-4 py-3">{{ racer.racer.exacta_rate }}  ({{ racer.racer.exacta_rate_place }})</td>
+    <td class="border-t-2 border-gray-200 px-4 py-3">{{ racer.racer.exhibition_time }}</td>
+    <td class="border-t-2 border-gray-200 px-4 py-3">{{ racer.racer.tilt }}</td>
   </tr>
 </template>
 

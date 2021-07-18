@@ -9,14 +9,14 @@ class BoatTicketBase:
     def first_prize_index(self):
         pred = self.pred
         first = pred.argmax(axis = 0)
-        return first
+        return int(first)
     
     # 同確率ならインデックスが若い方を返す
     def second_prize_index(self):
         first = self.first_prize_index()
         del_f = np.delete(self.pred, first)
         second = del_f.argmax(axis = 0)
-        return second if first > second else second + 1
+        return int(second) if first > second else second + 1
     
     def third_prize_index(self):
         first = self.first_prize_index()
@@ -24,6 +24,4 @@ class BoatTicketBase:
         del_f = np.delete(self.pred, [first, second])
         third_val = np.max(del_f)
         third = np.where(self.pred == third_val)
-        return third[-1][0]
-        
-    
+        return int(third[-1][0])

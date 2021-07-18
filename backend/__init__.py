@@ -19,9 +19,12 @@ from backend.controllers.login import login_blueprint
 from backend.controllers.batch import batch
 from backend.controllers.prediction import prediction
 from backend.controllers.race import race_bp
+from backend.controllers.view_prediction import view_prediction
 
 app.register_blueprint(login_blueprint, url_prefix="/api/login")
 app.register_blueprint(race_bp, url_prefix="/api/races")
+app.register_blueprint(view_prediction, url_prefix="/api/view_prediction")
+
 
 app.register_blueprint(batch, url_prefix="/batch")
 app.register_blueprint(prediction, url_prefix="/prediction")
