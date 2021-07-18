@@ -40,7 +40,7 @@ docker exec -i -t izanami-mysql bash
 
 mysql -u root -p 
 
-password
+izanami
 
 use mysql
 
@@ -53,5 +53,7 @@ grant all on db_izanami.* to izanami@localhost;
 docker exec -i -t izanami-backend bash
 
 python -m initialdatasetup.db_migrate (テーブル作成)
+
+mysql -u izanami -pizanami db_izanami < user.sql
 
 mysql -u izanami -pizanami db_izanami < dump.sql
