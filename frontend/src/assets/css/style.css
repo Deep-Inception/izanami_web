@@ -30,41 +30,6 @@
     max-width: 1170px;
   }
 
-  header {
-    background-color: rgba(34, 49, 52, 0.9);
-    height: 50px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 10;
-  }
-
-  .header-left {
-    float: left;
-  }
-
-  .header-logo {
-    font-size: 35px;
-    padding: 0px 8px;
-    color: #fff;
-  }
-
-  .header-right {
-    float: right;
-    background-color: rgba(255, 255, 255, 0.3);
-    transition: all 0.5s;
-  }
-
-  .header-right:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-  }
-
-  .header-right a {
-    line-height: 50px;
-    padding: 0 25px;
-    color: white;
-    display: block;
-  }
 
   .top-wrapper {
     padding: 80px 0 20px 0;
@@ -131,23 +96,4 @@
     position: relative;
     top: 7px;
     box-shadow: none;
-  }
-
-  footer {
-    background-color: rgba(34, 49, 52, 0.9);
-    color: #fff;
-    margin-top: 20px;
-  }
-
-  .footer-logo {
-    float: left;
-    font-size: 36px;
-    padding: 20px;
-  }
-
-  .footer-list {
-    float: right;
-    font-size: 18px;
-    padding: 20px;
-    display: table-cell;
   }
