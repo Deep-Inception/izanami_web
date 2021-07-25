@@ -1,5 +1,5 @@
 import numpy as np
-from boatticket.boat_ticket_base import BoatTicketBase
+from .boat_ticket_base import BoatTicketBase
 
 # 複式舟券のabstractクラス
 class CombinationBoatTicket(BoatTicketBase):

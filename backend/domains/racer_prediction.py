@@ -23,3 +23,6 @@ class RacerPrediction(db.Model):
         self.version = version
         self.value = value
         return self
+
+    def is_this_version(self, model, version):
+        return self.model == model and self.version == version

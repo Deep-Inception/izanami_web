@@ -75,7 +75,16 @@ class TimetableRacer(db.Model, ModelMixin):
 
     def detail(self):
         detail = {}
+        detail['couse'] = self.couse
+        detail['racer_id'] = self.racer_id
         detail['name'] = self.name
         detail['age'] = self.age
-        detail['couse'] = self.couse
+        detail['weight'] = self.weight
+        detail['rank'] = self.rank
+        detail['win_rate'] = self.win_rate
+        detail['win_rate_place'] = self.win_rate_place
+        detail['exacta_rate'] = self.exacta_rate
+        detail['exacta_rate_place'] = self.exacta_rate_place
+        detail['exhibition_time'] = self.exhibition_time
+        detail['tilt'] = self.tilt
         return detail

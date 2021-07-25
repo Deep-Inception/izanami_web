@@ -1,5 +1,5 @@
 import numpy as np
-from boatticket.boat_ticket_base import CombinationBoatTicket
+from .combination_boat_ticket import CombinationBoatTicket
 
 # 3連複クラス
 class Trio(CombinationBoatTicket):
