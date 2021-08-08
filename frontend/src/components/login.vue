@@ -6,7 +6,7 @@
       <title>Top</title>
     </head>
     <body>
-      <Header></Header>
+      <Header :loginScreen="loginScreen"></Header>
       <section class="text-gray-600 body-font">
         <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
           <div class="lg:w-3/8 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
@@ -49,7 +49,8 @@ export default {
   data: function () {
     return {
       Email: '',
-      Password: ''
+      Password: '',
+      loginScreen: true
     }
   },
   methods: {
@@ -57,7 +58,7 @@ export default {
       document.getElementById('loginResult').innerHTML = ''
       // checkloginイベント(htmlファイル内で定義している)の内容を記述
       const axios = backendApi()
-      var nextPage = 'pageA'
+      var nextPage = 'index'
 
       // axiosのthenメソッドの中ではthisがvueコンポーネントを指さなくなるので別の変数に割り当てておく
       var self = this

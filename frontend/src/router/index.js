@@ -7,7 +7,7 @@ const routerOptions = [
   { path: '/index', name: 'index', component: 'index' },
   { path: '/races', name: 'races', query: { auth: '' }, component: 'races' },
   { path: '/raceDetail', name: 'raceDetail', component: 'raceDetail' },
-  { path: '*', component: 'NotFound' }
+  { path: '*', component: 'notFound' }
 ]
 
 const routes = routerOptions.map(route => {

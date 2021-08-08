@@ -12,12 +12,12 @@
           <div class="flex flex-wrap">
             <div v-for="race in place_data.races" :key="race.race_number" v-bind:race="race">
               <div class="flex p-2 lg:w-1/12 md:w-1/6 w-full">
-                <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg" :class="backgroundColor(race.deadline, getPlace(place_data.place))">
+                <router-link :to="{name: 'raceDetail', query: {date: date, place: place_data.place, race: race.race_number}}" class="h-full flex items-center border-gray-200 border p-4 rounded-lg" :class="backgroundColor(race.deadline, getPlace(place_data.place))">
                   <div class="flex-grow">
                     <h2 class="text-gray-900 title-font font-medium text-center underline">{{race.race_number}}R</h2>
                     <p class="text-gray-900 text-center">{{race.deadline}}</p>
                   </div>
-                </div>
+                </router-link>
               </div>
             </div>
           </div>
@@ -45,7 +45,8 @@ export default {
         ['10', '三国'], ['11', 'びわこ'], ['12', '住之江'], ['13', '尼崎'], ['14', '鳴門'], ['15', '丸亀'],
         ['16', '児島'], ['17', '宮島'], ['18', '徳山'], ['19', '下関'], ['20', '若松'], ['21', '芦屋'],
         ['22', '福岡'], ['23', '唐津'], ['24', '大村']]
-      )
+      ),
+      date: this.$route.query.date
     }
   },
   mounted () {
