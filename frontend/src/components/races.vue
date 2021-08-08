@@ -31,14 +31,13 @@
 <script>
 import Header from './header.vue'
 import Footer from './footer.vue'
-import raceListItem from './raceListItem.vue'
 import backendApi from '../mixins/backendApi.js'
 var now = new Date()
 let flag
 flag = 0
 let place
 export default {
-  components: { Header, Footer, raceListItem },
+  components: { Header, Footer },
   data: function () {
     return {races: [],
       map: new Map([['01', '桐生'], ['02', '戸田'], ['03', '江戸川'], ['04', '平和島'],
