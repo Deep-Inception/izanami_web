@@ -47,7 +47,7 @@ export default {
     let date = this.$route.query.date
     let place = this.$route.query.place
     let race = this.$route.query.race
-    axios.get(`api/races/${date}/${place}/${race}`).then(response => { this.data = response.data })
+    axios.get(`api/races/${date}/${place}/${race}`, {params: { token: process.env.API_KEY }}).then(response => { this.data = response.data })
   },
   methods: {
     boatraceLink: function (date, place, race) {

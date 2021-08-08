@@ -14,6 +14,7 @@ services:
 
   izanami-front:
     container_name: izanami-front
+    init: true
     build:
       context: ./frontend/
       dockerfile: Dockerfile.dev
