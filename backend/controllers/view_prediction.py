@@ -3,13 +3,17 @@ import datetime
 import numpy as np
 from backend.domains.timetable_racer import TimetableRacer
 from backend.domains.race import Race, RaceStatusEnum
-from backend.controllers import prediction_racer_prize_lgb
+from backend.controllers import prediction_racer_prize_lgb, auth_api
 from backend import db_session
 from backend.models import boatticket
 import backend.utils.izanamiutils.race_util as race_util
 
 view_prediction = Blueprint('view_prediction', __name__)
 logger = logging.logging
+
+@view_prediction.before_request
+def api_auth():
+    auth_api.api_auth()
 
 @view_prediction.route("/<date>/<place>/<race_number>")
 def predict(date, place, race_number):

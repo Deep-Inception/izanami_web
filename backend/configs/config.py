@@ -13,5 +13,8 @@ class BaseConfig(object):
     # csrf token用秘密鍵
     WTF_CSRF_SECRET_KEY = os.urandom(24)
 
+    # APIを呼ばれた時の認証
+    API_AUTH_KEY = '005baae116fb628392bf71626a01dce240b0941b3498ae23a5f7533721842118'
+
 class ProductionConfig(BaseConfig):
     DEBUG = False

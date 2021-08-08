@@ -5,9 +5,14 @@ from flask import Blueprint, jsonify, request, make_response, request
 from flask import logging
 from backend.domains.race import Race
 from backend.domains.timetable_racer import TimetableRacer
+from backend.controllers import auth_api
 
 race_bp = Blueprint('races', __name__)
 logger = logging.logging
+
+@race_bp.before_request
+def api_auth():
+    auth_api.api_auth()
 
 @race_bp.route('/')
 def index():

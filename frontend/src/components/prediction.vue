@@ -57,7 +57,7 @@ export default {
     let date = this.date
     let place = this.place
     let race = this.race
-    axios.get(`api/view_prediction/${date}/${place}/${race}`).then(response => { this.data = response.data })
+    axios.get(`api/view_prediction/${date}/${place}/${race}`, {params: { token: process.env.API_KEY }}).then(response => { this.data = response.data })
   }
 }
 </script>
