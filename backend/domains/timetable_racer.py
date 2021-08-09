@@ -66,7 +66,7 @@ class TimetableRacer(db.Model, ModelMixin):
         return self
 
     def has_before_info(self):
-        return self.exhibition_time is not None or self.tilt is not None
+        return self.exhibition_time is not None and self.tilt is not None
 
     def set_before_info(self, dto):
         self.exhibition_time = dto.exhibition

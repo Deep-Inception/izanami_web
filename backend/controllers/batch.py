@@ -15,8 +15,8 @@ from backend import db_session
 batch = Blueprint('batch', __name__)
 logger = logging.logging
 
-# 当日のレース予定インポート　http://127.0.0.1:5000/batch/race_index/
-# 直前情報インポート　http://127.0.0.1:5000/batch/before_info/
+# 当日のレース予定インポート http://127.0.0.1:5000/batch/race_index/
+# 直前情報インポート http://127.0.0.1:5000/batch/before_info/
 
 # 重複でインポートしようとしてエラーにならないように一件ずつコミット
 def commit(race):
@@ -56,13 +56,15 @@ def import_race_data(date):
         racers = [TimetableRacer().set_params_from_dto(racer_dto) for racer_dto in race.racers ]
         for racer in racers: commit(racer)
 
-# 20分内に締め切りを迎えるレースの直前情報を取得する
+# 15分内に締め切りを迎えるレースの直前情報を取得する
 @batch.route("/before_info/")
 def before_info_batch():
     now = datetime.datetime.now()
-    time = datetime.timedelta(minutes=20)
+    time = datetime.timedelta(minutes=15)
     deadline_datetime = now + time
-    races = Race.query.filter(deadline_datetime >= Race.deadline, Race.status == RaceStatusEnum.BEFORE).all()
+    # 展示タイムが表示される前の可能性があるので、IMMEDIATELY_BEFOREのレースも取得する
+    races = Race.query.filter(deadline_datetime >= Race.deadline, (Race.status == RaceStatusEnum.BEFORE) | (Race.status == RaceStatusEnum.IMMEDIATELY_BEFORE) ).all()
+    logger.info( f"{len(races)} 直前情報の取得中")
     for race in races:
         try:
             logger.info(race.before_info_url())
@@ -74,13 +76,19 @@ def before_info_batch():
                     racer.set_before_info(before_info_racer)
             race.status = RaceStatusEnum.IMMEDIATELY_BEFORE
             db_session.commit()
-        except:
-            logger.error("直前情報の取得に失敗しました")
+        except Exception as e:
+            logger.error(f"直前情報の取得に失敗しました {race.id} {race.before_info_url()}")
+            logger.error(f"type: {str(type(e))}")
+            logger.error(f"args: {str(e.args)}")
     return "ok"
 
+# 30分以上前に締め切りを迎えたレースの結果を取得する
 @batch.route("/race_result/")
 def race_result_batch():
-    races = Race.query.filter(Race.status == RaceStatusEnum.IMMEDIATELY_BEFORE).all()
+    now = datetime.datetime.now()
+    time = datetime.timedelta(minutes=30)
+    deadline_datetime = now - time
+    races = Race.query.filter(deadline_datetime >= Race.deadline,Race.status == RaceStatusEnum.IMMEDIATELY_BEFORE).all()
     for race in races:
         try:
             logger.info(race.race_result_url())
@@ -98,7 +106,7 @@ def race_result_batch():
                         rr.timetable_racer_id = racer.id
                         racer_result = RacerResult().set_params_from_dto(rr)
                         db_session.add(racer_result)
-                    
+
                     race.status = RaceStatusEnum.FINISHED
                 # 結果を取得したレースはレース結果を予想する必要がないので、予想済フラグを立てる
                 race.has_prediction = True
