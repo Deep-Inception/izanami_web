@@ -33,8 +33,12 @@ def predict():
         for race in races:
             race.has_prediction = True
         db_session.commit()
-    except :
+    except Exception as e:
         logger.error("%i 件の予想失敗" % len(races))
+        logger.error(f"type: {str(type(e))}")
+        logger.error(f"args: {str(e.args)}")
+        import traceback
+        traceback.print_exc()
     finally:
         db_session.expunge_all()
     return "ok"
@@ -42,6 +46,8 @@ def predict():
 def predict_data():
     # 予想するレーサーのデータフレームを作成する
     race_df = Race.values_as_dataframe_by_query(db_session.query(Race).filter(Race.status == RaceStatusEnum.IMMEDIATELY_BEFORE, Race.has_prediction == False).all())
+    if race_df.empty:
+        return pd.DataFrame()
     race_ids = set(race_df.race_id)
     timetable_racer_df = TimetableRacer.values_as_dataframe_by_query(db_session.query(TimetableRacer).filter(TimetableRacer.race_id.in_(race_ids)).all())
     merged_df = pd.merge(race_df, timetable_racer_df)

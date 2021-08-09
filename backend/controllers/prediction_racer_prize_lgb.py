@@ -56,7 +56,7 @@ def predict(df_data):
     y_pred = ml_racer_prize_lgb.predict(pred_data[ml_racer_prize_lgb.cols], model_file=ML_PICKLE_PATH)
     
     for ttr_id , prize in zip(list(df_data["timetable_racer_id"]), y_pred):
-        result = RacerPrediction(timetable_racer_id=ttr_id, value=prize, model=ml_racer_prize_lgb.MODEL_NAME, version=ml_racer_prize_lgb.VERSION)
+        result = RacerPrediction(timetable_racer_id=ttr_id, value=str(prize), model=ml_racer_prize_lgb.MODEL_NAME, version=ml_racer_prize_lgb.VERSION)
         db_session.add(result)
         db_session.commit()
         db_session.expunge(result)
