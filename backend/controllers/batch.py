@@ -67,9 +67,12 @@ def before_info_batch():
     logger.info( f"{len(races)} 直前情報の取得中")
     for race in races:
         try:
+            racers = race.timetable_racers
+            has_before_info_list = [racer.has_before_info() for racer in racers]
+            if all(has_before_info_list):
+                continue
             logger.info(race.before_info_url())
             before_info_data = before_info.get_data(race.before_info_url())
-            racers = race.timetable_racers
             # racerもbefore_info_racerも枠順に取得しているため一緒にイテレートできる
             for (racer, before_info_racer) in zip(racers, before_info_data.racers):
                 if not racer.has_before_info():
