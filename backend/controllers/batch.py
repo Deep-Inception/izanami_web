@@ -96,6 +96,9 @@ def race_result_batch():
             if race_rst is not None: #まだレース結果が表示されていなければ次にいく
                 if race_rst.stop:
                     race.status = RaceStatusEnum.STOPPED
+                    race.has_prediction = True
+                    db_session.commit()
+                    db_session.expunge(race)
                 else:
                     race_rst.race_id = race.id
                     result = Result().set_params_from_dto(race_rst)
@@ -108,12 +111,12 @@ def race_result_batch():
                         db_session.add(racer_result)
 
                     race.status = RaceStatusEnum.FINISHED
-                # 結果を取得したレースはレース結果を予想する必要がないので、予想済フラグを立てる
-                race.has_prediction = True
-                db_session.commit()
-                db_session.expunge(result)
-                db_session.expunge(racer_result)
-                db_session.expunge(race)
+                    # 結果を取得したレースはレース結果を予想する必要がないので、予想済フラグを立てる
+                    race.has_prediction = True
+                    db_session.commit()
+                    db_session.expunge(result)
+                    db_session.expunge(racer_result)
+                    db_session.expunge(race)
         except Exception as e:
             logger.error(f"レース結果の取得に失敗しました {race.id}")
             logger.error(f"type: {str(type(e))}")
