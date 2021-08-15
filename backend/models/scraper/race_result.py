@@ -1,4 +1,6 @@
 from bs4 import BeautifulSoup
+from requests.adapters import HTTPAdapter
+from urllib3.util import Retry
 import requests
 import sys, re
 sys.path.append("../")
@@ -7,7 +9,16 @@ sys.path.append("../izanamiutils")
 from backend.utils.izanamiutils import math_util
 
 def get_data(url):
-    r = requests.get(url)
+    session = requests.Session()
+    retries = Retry(total=5,  # リトライ回数
+                backoff_factor=1,  # sleep時間
+                status_forcelist=[500, 502, 503, 504])  # timeout以外でリトライするステータスコード
+    session.mount("https://", HTTPAdapter(max_retries=retries))
+    session.mount("http://", HTTPAdapter(max_retries=retries))
+    r = session.get(url=url,
+                       stream=True,
+                       timeout=(10.0, 20.0))
+
     result = RaceResult(r)
     if result.has_race_result():
         result.scrape()
