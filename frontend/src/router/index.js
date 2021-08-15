@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 const routerOptions = [
-  { path: '/', component: 'login' },
+  { path: '/', component: 'index' },
   { path: '/login', name: 'login', query: { next: '' }, component: 'login' },
   { path: '/index', name: 'index', component: 'index' },
   { path: '/races', name: 'races', query: { auth: '' }, component: 'races' },

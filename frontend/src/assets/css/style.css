@@ -1,0 +1,19 @@
+  .clear {
+    clear: left;
+    clear: right;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Meiryo";
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1170px;
+  }
+
+  .top-wrapper {
+    padding: 80px 0 20px 0;
+    text-align: center;
+  }
