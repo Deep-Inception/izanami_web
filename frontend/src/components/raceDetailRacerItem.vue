@@ -8,6 +8,7 @@
     <td class="border-t-2 border-gray-200 px-4 py-3">{{ racer.racer.exacta_rate }}  ({{ racer.racer.exacta_rate_place }})</td>
     <td class="border-t-2 border-gray-200 px-4 py-3">{{ racer.racer.exhibition_time }}</td>
     <td class="border-t-2 border-gray-200 px-4 py-3">{{ racer.racer.tilt }}</td>
+    <td class="border-t-2 border-gray-200 px-4 py-3">{{ racer.racer.prize }}</td>
   </tr>
 </template>
 

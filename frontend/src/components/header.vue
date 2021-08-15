@@ -11,7 +11,7 @@
         <span class="ml-3 text-xl text-white">Izanami</span>
       </div>
       <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
-        <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
+        <button class="hidden inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
           <p v-if=loginScreen>Sing Up</p>
           <p v-else>Sing Out</p>
         </button>

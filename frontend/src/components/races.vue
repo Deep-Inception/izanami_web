@@ -67,6 +67,12 @@ export default {
       return ret
     },
     backgroundColor: function (deadline, racePlace) {
+      var today = new Date()
+      if (this.$route.query.date > today.getFullYear() + ('00' + (today.getMonth() + 1)).slice(-2) + ('00' + today.getDate()).slice(-2)) {
+        return 'blue'
+      } else if (this.$route.query.date < today.getFullYear() + ('00' + (today.getMonth() + 1)).slice(-2) + ('00' + today.getDate()).slice(-2)) {
+        return 'gray'
+      }
       if (place !== racePlace) {
         flag = 0
         place = racePlace
