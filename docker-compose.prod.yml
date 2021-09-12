@@ -24,11 +24,10 @@ services:
     links:
         - izanami-backend_prod
 
-  izanami-mysql_prod:
-    container_name: izanami-mysql_prod
+  izanami-mysql:
+    container_name: izanami-mysql
     build: ./db/
     restart: always
-    hostname: izanami-mysql
     env_file: 
       - ./db/.env
     environment: 
