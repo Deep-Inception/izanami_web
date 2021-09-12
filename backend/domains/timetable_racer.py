@@ -63,7 +63,6 @@ class TimetableRacer(db.Model, ModelMixin):
         self.result_4 = dto.result_4
         self.result_5 = dto.result_5
         self.result_6 = dto.result_6
-        self.racer_result.prize = dto.prize
         return self
 
     def has_before_info(self):
