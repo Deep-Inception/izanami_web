@@ -88,5 +88,5 @@ class TimetableRacer(db.Model, ModelMixin):
         detail['exacta_rate_place'] = self.exacta_rate_place
         detail['exhibition_time'] = self.exhibition_time
         detail['tilt'] = self.tilt
-        detail['prize'] = self.racer_result.prize
+        detail['prize'] = None if self.racer_result is None else self.racer_result.prize
         return detail
