@@ -9,6 +9,7 @@ services:
     command: uwsgi --ini uwsgi.ini
     volumes:
       - ./backend:/backend
+      - ./batch_scheduler.py:/batch_scheduler.py
 
 
   izanami-front_prod:
