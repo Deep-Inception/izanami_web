@@ -11,6 +11,7 @@ services:
       - 5000:5000
     volumes:
       - ./backend:/backend
+      - ./batch_scheduler.py:/batch_scheduler.py
 
   izanami-front:
     container_name: izanami-front

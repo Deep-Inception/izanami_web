@@ -1,6 +1,7 @@
 import schedule
 import time, datetime
 from backend.controllers import batch, prediction
+import daemon
 
 def race_index_job():
     batch.index()
@@ -22,6 +23,6 @@ schedule.every().day.at("02:00").do(race_index_job)
 schedule.every(5).minutes.do(before_info_job)
 schedule.every(30).minutes.do(race_result_job)
 
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+with daemon.DaemonContext():
+    while True:
+        schedule.run_pending()
