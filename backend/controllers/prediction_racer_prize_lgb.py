@@ -30,11 +30,11 @@ def fix():
 
 # モデルの学習に利用するデータを取得する 戻り値：dataframe
 def get_all_train_data():
-    # レースは直近一年のものに限定する
+    # レースは直近3ヶ月のものに限定する
     race_df = Race.values_as_dataframe_by_query(db_session.query(Race).filter(Race.status == RaceStatusEnum.FINISHED).all())
     race_df.deadline = pd.to_datetime(race_df.deadline)
     last_date = race_df.deadline.max()
-    race_df = race_df.loc[race_df.deadline >= (last_date - datetime.timedelta(days=365))]
+    race_df = race_df.loc[race_df.deadline >= (last_date - datetime.timedelta(months=3))]
     timetable_racer_df = TimetableRacer.values_as_dataframe_by_query(db_session.query(TimetableRacer).filter(TimetableRacer.exhibition_time != None).all())
     # レースが行われたが無効の場合があるので、順位がある人のデータだけ使って予測する
     racer_result_df = RacerResult.values_as_dataframe_by_query(RacerResult.query.filter(RacerResult.time != None).all())
