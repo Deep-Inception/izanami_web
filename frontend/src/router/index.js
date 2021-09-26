@@ -2,8 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 const routerOptions = [
-  { path: '/', component: 'index' },
+  { path: '/', component: 'races' },
   { path: '/login', name: 'login', query: { next: '' }, component: 'login' },
+  { path: '/feedback', name: 'feedback', query: { next: '' }, component: 'feedback' },
+  { path: '/statistics', name: 'statistics', query: { next: '' }, component: 'statistics' },
   { path: '/index', name: 'index', component: 'index' },
   { path: '/races', name: 'races', query: { auth: '' }, component: 'races' },
   { path: '/raceDetail', name: 'raceDetail', component: 'raceDetail' },
