@@ -2,9 +2,9 @@
   <div>
     <Header></Header>
     <section class="text-gray-600 body-font">
-      <div class="container px-0 py-24 mx-auto">
+      <div class="container px-0 py-12 mx-auto">
         <div class="flex flex-col text-center w-full mb-4">
-          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">当日レース一覧</h1>
+          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">レース一覧</h1>
           <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Races with results are shown in gray, the next race is shown in red, and the race after that is shown in blue. If you want to see the details, click on the race.</p>
         </div>
         <ul v-for='place_data in races' :key="place_data.place">

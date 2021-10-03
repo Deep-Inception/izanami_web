@@ -41,7 +41,6 @@ import backendApi from '../mixins/backendApi.js'
 import { KJUR } from 'jsrsasign'
 import router from '../router/index.js'
 export default {
-  name: 'login',
   components: {
     Header,
     Footer
