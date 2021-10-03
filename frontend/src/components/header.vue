@@ -13,7 +13,7 @@
         <span class="ml-3 text-xl text-white">Izanami</span>
       </div>
       <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
-        <a href="/feedback" class="text-white hover:text-gray-200">Feedback</a>
+
       </div>
     </div>
   </header>
