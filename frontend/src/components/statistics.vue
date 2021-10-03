@@ -179,7 +179,12 @@ export default {
     }
   },
   mounted () {
-    document.getElementById('raceDate').value = '2020-09-23'
+    var objDate = new Date()
+    objDate.setDate(objDate.getDate() - 1)
+    var year = objDate.getFullYear()
+    var month = objDate.getMonth() + 1
+    var day = objDate.getDate()
+    document.getElementById('raceDate').value = year + '-' + ('00' + month).slice(-2) + '-' + ('00' + day).slice(-2)
   },
   methods: {
     checkResult: function (event) {
