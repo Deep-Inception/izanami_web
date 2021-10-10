@@ -56,8 +56,7 @@ def statistics():
     for race_id in race_id_list:
         if result[race_id[0]] == ai_result[race_id[0]]:
             correct += 1
-            balance += db_session.query(Result.win).filter(Result.race_id == race_id[0]).all()[0][0]
-            print(db_session.query(Result.win).filter(Result.race_id == race_id[0]).all()[0][0])
+            balance += db_session.query(Result.win).filter(Result.race_id == race_id[0]).all()[0][0] - 100
             recovery_amount += db_session.query(Result.win).filter(Result.race_id == race_id[0]).all()[0][0]
         else:
             incorrect += 1
