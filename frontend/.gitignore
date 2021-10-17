@@ -1,7 +1,7 @@
 .DS_Store
-node_modules/
+node_modules/*
 !/node_modules/vue-adsense/
-node_modules/vue-adsense/
+node_modules/vue-adsense/*
 !/node_modules/vue-adsense/main.js
 npm-debug.log*
 yarn-debug.log*
