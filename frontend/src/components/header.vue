@@ -13,9 +13,14 @@
         <span class="ml-3 text-xl text-white">Izanami</span>
       </div>
       <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
-
       </div>
     </div>
+    <adsense
+      ad-client="ca-pub-3295465731351283"
+      ad-slot="2750439185"
+      ad-style="display:block"
+      ad-format="auto">
+    </adsense>
   </header>
 </template>
 
