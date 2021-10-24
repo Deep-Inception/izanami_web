@@ -1,5 +1,5 @@
 <template>
-  <footer class="text-gray-600 body-font">
+  <footer class="w-full py-7 text-gray-600">
     <div class="bg-blue-500 p-2">
       <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
         <p class="text-white text-sm text-center sm:text-left">© DeepInception —
