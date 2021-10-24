@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="flex flex-col min-h-screen">
       <Header></Header>
-      <div class="top-wrapper">
+      <div class="top-wrapper flex-auto">
         <div class="lg:w-3/4 w-full mx-auto overflow-auto">
           <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">カレンダー</h1>
           <p>こちらの日付から当日のレース情報に遷移できます。</p>
