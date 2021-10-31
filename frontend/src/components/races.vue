@@ -51,7 +51,6 @@ export default {
   },
   mounted () {
     const axios = backendApi()
-    console.log(process.env)
     axios.get('api/races', {params: { date: this.$route.query.date, token: process.env.API_KEY }}).then(response => { this.races = response.data })
   },
   methods: {
