@@ -6,6 +6,8 @@ const routerOptions = [
   { path: '/login', name: 'login', query: { next: '' }, component: 'login' },
   { path: '/feedback', name: 'feedback', query: { next: '' }, component: 'feedback' },
   { path: '/statistics', name: 'statistics', query: { next: '' }, component: 'statistics' },
+  { path: '/disclaimer', name: 'disclaimer', query: { next: '' }, component: 'disclaimer' },
+  { path: '/privacyPolicy', name: 'privacyPolicy', query: { next: '' }, component: 'privacyPolicy' },
   { path: '/index', name: 'index', component: 'index' },
   { path: '/races', name: 'races', query: { auth: '' }, component: 'races' },
   { path: '/raceDetail', name: 'raceDetail', component: 'raceDetail' },
