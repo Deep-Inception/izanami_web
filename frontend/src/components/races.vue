@@ -33,10 +33,12 @@
 import Header from './header.vue'
 import Footer from './footer.vue'
 import backendApi from '../mixins/backendApi.js'
-var now = new Date()
+let now = new Date()
+let todayStr = now.getFullYear() + ('00' + (now.getMonth() + 1)).slice(-2) + ('00' + now.getDate()).slice(-2)
 let flag
 flag = 0
 let place
+
 export default {
   components: { Header, Footer },
   data: function () {
@@ -47,12 +49,12 @@ export default {
         ['16', '児島'], ['17', '宮島'], ['18', '徳山'], ['19', '下関'], ['20', '若松'], ['21', '芦屋'],
         ['22', '福岡'], ['23', '唐津'], ['24', '大村']]
       ),
-      date: this.$route.query.date
+      date: this.$route.query.date ? this.$route.query.date : todayStr
     }
   },
   mounted () {
     const axios = backendApi()
-    axios.get('api/races', {params: { date: this.$route.query.date, token: process.env.API_KEY }}).then(response => { this.races = response.data })
+    axios.get('api/races', {params: { date: this.date, token: process.env.API_KEY }}).then(response => { this.races = response.data })
   },
   methods: {
     getPlace: function (id) {
@@ -68,10 +70,9 @@ export default {
       return ret
     },
     backgroundColor: function (deadline, racePlace) {
-      var today = new Date()
-      if (this.$route.query.date > today.getFullYear() + ('00' + (today.getMonth() + 1)).slice(-2) + ('00' + today.getDate()).slice(-2)) {
+      if (this.$route.query.date > todayStr) {
         return 'blue'
-      } else if (this.$route.query.date < today.getFullYear() + ('00' + (today.getMonth() + 1)).slice(-2) + ('00' + today.getDate()).slice(-2)) {
+      } else if (this.$route.query.date < todayStr) {
         return 'gray'
       }
       if (place !== racePlace) {
