@@ -33,6 +33,7 @@ import Header from './header.vue'
 import Footer from './footer.vue'
 import backendApi from '../mixins/backendApi.js'
 let now = new Date()
+let todayStr = now.getFullYear() + ('00' + (now.getMonth() + 1)).slice(-2) + ('00' + now.getDate()).slice(-2)
 let flag
 flag = 0
 let place
@@ -47,7 +48,7 @@ export default {
         ['16', '児島'], ['17', '宮島'], ['18', '徳山'], ['19', '下関'], ['20', '若松'], ['21', '芦屋'],
         ['22', '福岡'], ['23', '唐津'], ['24', '大村']]
       ),
-      date: this.$route.query.date ? this.$route.query.date : `${now.getFullYear()}${now.getMonth() + 1}${now.getDate()}`
+      date: this.$route.query.date ? this.$route.query.date : todayStr
     }
   },
   mounted () {
@@ -68,9 +69,9 @@ export default {
       return ret
     },
     backgroundColor: function (deadline, racePlace) {
-      if (this.$route.query.date > now.getFullYear() + ('00' + (now.getMonth() + 1)).slice(-2) + ('00' + now.getDate()).slice(-2)) {
+      if (this.$route.query.date > todayStr) {
         return 'blue'
-      } else if (this.$route.query.date < now.getFullYear() + ('00' + (now.getMonth() + 1)).slice(-2) + ('00' + now.getDate()).slice(-2)) {
+      } else if (this.$route.query.date < todayStr) {
         return 'gray'
       }
       if (place !== racePlace) {
