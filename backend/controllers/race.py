@@ -17,8 +17,6 @@ def api_auth():
 @race_bp.route('/')
 def index():
     date_str = request.args.get('date')
-    today = datetime.datetime.today()
-    date_str = date_str if date_str != None else today.strftime("%Y%m%d")
     date_sta = datetime.datetime.strptime( date_str + "0000", "%Y%m%d%H%M")
     date_en = datetime.datetime.strptime( date_str + "2359", "%Y%m%d%H%M")
     races = Race.query.filter(Race.deadline >= date_sta, Race.deadline <= date_en).all()
