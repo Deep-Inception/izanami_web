@@ -2,7 +2,7 @@
   <header class="text-gray-600 body-font bg-blue-500">
     <div class="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center">
       <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
-        <router-link :to="{path: 'races', query: {date: date}}" class="mr-10 text-white hover:text-gray-200">Home</router-link>
+        <a href="/races" class="mr-10 text-white hover:text-gray-200">Home</a>
         <a href="/statistics" class="mr-10 text-white hover:text-gray-200">過去予想結果</a>
         <a href="/index" class="mr-10 text-white hover:text-gray-200">カレンダー</a>
       </nav>

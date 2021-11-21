@@ -8,7 +8,7 @@
           <p class="lg:w-2/3 mx-auto leading-relaxed text-base">過去100万以上のレースデータをもとに作られた競艇予想の人工知能（AI）Izanamiが<br>レース結果の予想を教えてくれます。</p>
           <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Races with results are shown in gray, the next race is shown in red, and the race after that is shown in blue. If you want to see the details, click on the race.</p>
         </div>
-        <ul v-for='place_data in races' :key="place_data.place">
+        <ul v-for='place_data in this.races' :key="place_data.place">
           <h1 class="text-2xl font-medium title-font text-gray-900 mt-3 mb-1 text-center">{{getPlace(place_data.place)}}</h1>
           <div class="flex flex-wrap justify-center">
             <div v-for="race in place_data.races" :key="race.race_number" v-bind:race="race">
@@ -52,13 +52,10 @@ export default {
   },
   mounted () {
     const axios = backendApi()
+    console.log(111)
     axios.get('api/races', {params: { date: this.$route.query.date, token: process.env.API_KEY }}).then(response => { this.races = response.data })
-    window.addEventListener('popstate', this.popstateAction)
   },
   methods: {
-    popstateAction: function () {
-      location.reload()
-    },
     getPlace: function (id) {
       return this.map.get(id)
     },
