@@ -5,7 +5,7 @@ from .boat_ticket_base import BoatTicketBase
 class Trifecta(BoatTicketBase):
 
     def __init__(self, pred):
-        self.pred = np.reshape(pred, (6))
+        self.pred = np.reshape(pred, (-1))
 
     # 第1予想までを返す
     # TODO 第3予想まで計算して返せるようにする

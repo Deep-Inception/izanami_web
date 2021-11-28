@@ -5,7 +5,7 @@ from .boat_ticket_base import BoatTicketBase
 class Exacta(BoatTicketBase):
 
     def __init__(self, pred):
-        self.pred = np.reshape(pred, (6))
+        self.pred = np.reshape(pred, (-1))
 
     # 第3予想までを返す
     def predict(self):

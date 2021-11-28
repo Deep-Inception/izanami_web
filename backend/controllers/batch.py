@@ -10,6 +10,7 @@ from backend.domains.timetable_racer import TimetableRacer
 from backend.domains.racer_result import RacerResult
 from backend.domains.result import Result
 from backend.models.scraper import data_download, txt_to_dto_timetable, before_info, race_result
+from backend.controllers import prediction
 from backend import db_session
 
 batch = Blueprint('batch', __name__)
@@ -125,3 +126,10 @@ def race_result_batch():
             logger.error(f"type: {str(type(e))}")
             logger.error(f"args: {str(e.args)}")
     return "ok"
+
+@batch.route("/before_data_and_predict/")
+def before_data_and_predict():
+    before_info_batch()
+    prediction.predict()
+    return "ok"
+

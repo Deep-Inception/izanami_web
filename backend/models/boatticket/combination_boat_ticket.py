@@ -8,10 +8,10 @@ class CombinationBoatTicket(BoatTicketBase):
         self.create_all_rate_list()
 
     def predict(self):
-        first_idx = self.rate_idx[0]
-        second_idx = self.rate_idx[1]
-        third_idx = self.rate_idx[2]
-        return self.all_list[first_idx], self.all_list[second_idx], self.all_list[third_idx]
+        first = self.all_list[self.rate_idx[0]]
+        second = self.all_list[self.rate_idx[1]] if len(self.rate_idx) > 2 else None
+        third = self.all_list[self.rate_idx[2]] if len(self.rate_idx) > 3 else None
+        return first, second, third
 
     # [レーンの組み合わせ, 確率]のNumpyリスト
     def create_all_rate_list(self):
