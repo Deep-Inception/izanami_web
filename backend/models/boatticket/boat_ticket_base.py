@@ -3,7 +3,7 @@ import numpy as np
 # 舟券の親クラス　予想結果（一位確率）を引数にしてインスタンスを作る
 class BoatTicketBase:
     def __init__(self, pred):
-        self.pred = np.reshape(pred, (6))
+        self.pred = np.reshape(pred, (-1))
     
     # 同確率ならインデックスが若い方を返す    
     def first_prize_index(self):

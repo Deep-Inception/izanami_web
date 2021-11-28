@@ -53,6 +53,7 @@ def prediction_values(race, model, version):
 def index_to_course(pred_list, course_list):
     res = []
     for pred in pred_list:
-        pred_couse = [course_list[pred_idx] for pred_idx in pred]
-        res.append(pred_couse)
+        if pred:
+            pred_couse = [course_list[pred_idx] for pred_idx in pred]
+            res.append(pred_couse)
     return res
