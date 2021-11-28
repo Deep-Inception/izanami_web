@@ -5,12 +5,12 @@
       <div class="container px-0 py-12 mx-auto">
         <div class="flex flex-col text-center w-full mb-4">
           <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">レース一覧</h1>
-          <p class="lg:w-2/3 mx-auto leading-relaxed text-base">過去100万以上のレースデータをもとに作られた競艇予想の人工知能（AI）Izanamiがレース結果の予想を教えてくれます。</p>
+          <p class="lg:w-2/3 mx-auto leading-relaxed text-base">過去100万以上のレースデータをもとに作られた競艇予想の人工知能（AI）Izanamiが<br>レース結果の予想を教えてくれます。</p>
           <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Races with results are shown in gray, the next race is shown in red, and the race after that is shown in blue. If you want to see the details, click on the race.</p>
         </div>
         <ul v-for='place_data in races' :key="place_data.place">
           <h1 class="text-2xl font-medium title-font text-gray-900 mt-3 mb-1 text-center">{{getPlace(place_data.place)}}</h1>
-          <div class="flex flex-wrap">
+          <div class="flex flex-wrap justify-center">
             <div v-for="race in place_data.races" :key="race.race_number" v-bind:race="race">
               <div class="flex p-2 lg:w-1/12 md:w-1/6 w-full">
                 <router-link :to="{name: 'raceDetail', query: {date: date, place: place_data.place, race: race.race_number}}" class="h-full flex items-center border-gray-200 border p-4 rounded-lg" :class="backgroundColor(race.deadline, getPlace(place_data.place))">
