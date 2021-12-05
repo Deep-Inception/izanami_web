@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.backend
+    environment:
+      - TZ=Asia/Tokyo
     command: uwsgi --ini uwsgi.ini
     volumes:
       - ./backend:/backend
@@ -17,6 +19,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.frontend
+    environment:
+      - TZ=Asia/Tokyo
     command: nginx -g "daemon off;"
     ports:
       - 80:80
