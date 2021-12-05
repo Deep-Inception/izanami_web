@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile.backend
     environment:
-      - TZ=Asia/Tokyo
+      TZ: "Asia/Tokyo"
     command: uwsgi --ini uwsgi.ini
     volumes:
       - ./backend:/backend
@@ -20,7 +20,7 @@ services:
       context: .
       dockerfile: Dockerfile.frontend
     environment:
-      - TZ=Asia/Tokyo
+      TZ: "Asia/Tokyo"
     command: nginx -g "daemon off;"
     ports:
       - 80:80
