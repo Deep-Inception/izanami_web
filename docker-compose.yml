@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
+    environment:
+      TZ: "Asia/Tokyo"
     command: python manage.py
     ports: 
       - 5000:5000
@@ -19,6 +21,8 @@ services:
     build:
       context: ./frontend/
       dockerfile: Dockerfile.dev
+    environment:
+      TZ: "Asia/Tokyo"
     command: npm run dev
     ports:
       - 8080:8080

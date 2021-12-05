@@ -1,4 +1,4 @@
 0  0  1  *  * curl http://localhost:5000/prediction/fit
-0  2  *  *  * curl http://localhost:5000/batch/race_data
+0  2  *  *  * curl http://localhost:5000/batch/race_index
 */5   *  *  *  * curl http://localhost:5000/batch/before_data_and_predict
 30   *  *  *  * curl http://localhost:5000/batch/race_result
