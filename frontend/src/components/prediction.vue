@@ -1,7 +1,7 @@
 <template>
     <div>
-      <div class="top-wrapper">
-        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">AI予想</h1>
+      <div>
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900 text-center">AI予想</h1>
         <div class="lg:w-2/3 w-full mx-auto overflow-auto" v-if="data.size != 0">
           <table class="table-auto w-full text-left whitespace-no-wrap">
             <tbody>

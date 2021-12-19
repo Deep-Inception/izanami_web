@@ -8,11 +8,11 @@
           <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Races with results are shown in gray, the next race is shown in red, and the race after that is shown in blue. If you want to see the details, click on the race.</p>
         </div>
         <ul v-for='place_data in races' :key="place_data.place">
-          <h1 class="text-2xl font-medium title-font text-gray-900 mt-3 mb-1 text-center">{{getPlace(place_data.place)}}</h1>
+          <h1 class="text-2xl font-medium title-font text-gray-900 mt-3 mb-1 text-center">{{getPlaceName(place_data.place)}}</h1>
           <div class="flex flex-wrap">
             <div v-for="race in place_data.races" :key="race.race_number" v-bind:race="race">
               <div class="flex p-2 lg:w-1/12 md:w-1/6 w-full">
-                <router-link :to="{name: 'raceDetail', query: {date: date, place: place_data.place, race: race.race_number}}" class="h-full flex items-center border-gray-200 border p-4 rounded-lg" :class="backgroundColor(race.deadline, getPlace(place_data.place))">
+                <router-link :to="{name: 'raceDetail', query: {date: date, place: place_data.place, race: race.race_number}}" class="h-full flex items-center border-gray-200 border p-4 rounded-lg" :class="backgroundColor(race.deadline, getPlaceName(place_data.place))">
                   <div class="flex-grow">
                     <h2 class="text-gray-900 title-font font-medium text-center underline">{{race.race_number}}R</h2>
                     <p class="text-gray-900 text-center">{{race.deadline}}</p>
@@ -32,6 +32,7 @@
 import Header from './header.vue'
 import Footer from './footer.vue'
 import backendApi from '../mixins/backendApi.js'
+import utilsMixin from '../mixins/utils.js'
 let now = new Date()
 let todayStr = now.getFullYear() + ('00' + (now.getMonth() + 1)).slice(-2) + ('00' + now.getDate()).slice(-2)
 let flag
@@ -39,15 +40,11 @@ flag = 0
 let place
 
 export default {
+  mixins: [utilsMixin],
   components: { Header, Footer },
   data: function () {
-    return {races: [],
-      map: new Map([['01', '桐生'], ['02', '戸田'], ['03', '江戸川'], ['04', '平和島'],
-        ['05', '多摩川'], ['06', '浜名湖'], ['07', '蒲郡'], ['08', '常滑'], ['09', '津'],
-        ['10', '三国'], ['11', 'びわこ'], ['12', '住之江'], ['13', '尼崎'], ['14', '鳴門'], ['15', '丸亀'],
-        ['16', '児島'], ['17', '宮島'], ['18', '徳山'], ['19', '下関'], ['20', '若松'], ['21', '芦屋'],
-        ['22', '福岡'], ['23', '唐津'], ['24', '大村']]
-      ),
+    return {
+      races: [],
       date: this.$route.query.date ? this.$route.query.date : todayStr
     }
   },
@@ -56,9 +53,6 @@ export default {
     axios.get('api/races', {params: { date: this.date, token: process.env.API_KEY }}).then(response => { this.races = response.data })
   },
   methods: {
-    getPlace: function (id) {
-      return this.map.get(id)
-    },
     twoDigit: function (num) {
       let ret
       if (num < 10) {

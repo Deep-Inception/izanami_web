@@ -1,6 +1,7 @@
 <template>
     <div>
       <Header></Header>
+      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900 text-center">{{getPlaceName(this.$route.query.place)}} 第 {{ this.$route.query.race }} R</h1>
       <Prediction  :date="this.$route.query.date" :place="this.$route.query.place" :race="this.$route.query.race"></Prediction>
       <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900 text-center">レース情報</h1>
       <div class="lg:w-3/4 w-full mx-auto overflow-auto">
@@ -36,7 +37,9 @@ import Footer from './footer.vue'
 import Prediction from './prediction.vue'
 import raceDetailRacerItem from './raceDetailRacerItem.vue'
 import backendApi from '../mixins/backendApi.js'
+import utilsMixin from '../mixins/utils.js'
 export default {
+  mixins: [utilsMixin],
   components: { Header, Footer, Prediction, raceDetailRacerItem },
   data: function () {
     return {data: []}
