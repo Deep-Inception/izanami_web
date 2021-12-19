@@ -4,10 +4,6 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import './assets/tailwind.css'
-import VueAdsense from 'vue-adsense'
-
-Vue.component('adsense', VueAdsense)
-Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
