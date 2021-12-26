@@ -2,7 +2,7 @@
   <div class="flex flex-col min-h-screen">
     <Header></Header>
     <section class="text-gray-600 body-font flex-auto">
-      <div class="container px-5 py-12 mx-auto ">
+      <div class="container px-5 py-12 mx-auto">
         <div class="flex flex-col text-center w-full mb-4">
           <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">レース一覧</h1>
           <p class="mx-auto leading-relaxed text-base">過去100万以上のレースデータをもとに作られた競艇予想の人工知能（AI）Izanamiがレース結果の予想を教えてくれます。</p>
