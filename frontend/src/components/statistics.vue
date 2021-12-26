@@ -2,7 +2,7 @@
   <div class="flex flex-col min-h-screen">
     <Header></Header>
     <section class="text-gray-600 body-font flex-auto">
-      <div class="container px-0 py-12 mx-auto">
+      <div class="container px-5 py-12 mx-auto">
         <div class="flex flex-col text-center w-full mb-4">
           <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">過去予想結果</h1>
           <p class="mx-auto leading-relaxed text-base">条件を指定してIzanamiを使用した場合の収益を確認できます。</p>
