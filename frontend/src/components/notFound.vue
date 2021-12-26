@@ -9,7 +9,7 @@
           </svg>
           <p class="leading-relaxed text-lg">Page not found</p>
           <span class="inline-block h-1 w-10 rounded bg-indigo-500 mt-8 mb-6"></span>
-          <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">Press the Home button in the upper left corner.</h2>
+          <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">ページが見つかりません。Homeボタンを押してください。</h2>
         </div>
       </div>
     </section>
