@@ -212,8 +212,6 @@ export default {
           document.getElementById('purchaseAmount').innerHTML = response.data.purchaseAmount.toLocaleString()
           document.getElementById('purchaseCount').innerHTML = response.data.purchaseCount
           var balance = response.data.balance
-          console.log(response.data.purchaseAmount)
-          console.log(response.data.balance)
           if (balance >= 0) {
             document.getElementById('balance').innerHTML = '+' && balance.toLocaleString()
           } else {
